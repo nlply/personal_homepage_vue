@@ -6,7 +6,7 @@
     <n-col :span="12">
       <div style="text-align: left;">
         <div style="text-align: center;padding-bottom: 20px;">
-          <img alt="Vue logo" src="../assets/touxiang.jpeg" style="width: 30%;">
+          <img alt="avatar" src="../assets/avatar.png">
           <p style="font-family: 'Times New Roman', Times, serif;font-size: 40px;font-weight: bold;color: #000;">Yang Liu
           </p>
           <n-tag class="n-text-stylel">Independent Researcher</n-tag>
@@ -19,7 +19,7 @@
         </div>
         <n-flex justify="center">
           <n-icon size="40" style="cursor: pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 576 512">
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 576 512">
               <path
                 d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-352 96c35.3 0 64 28.7 64 64s-28.7 64-64 64s-64-28.7-64-64s28.7-64 64-64zm112 236.8c0 10.6-10 19.2-22.4 19.2H86.4C74 384 64 375.4 64 364.8v-19.2c0-31.8 30.1-57.6 67.2-57.6h5c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h5c37.1 0 67.2 25.8 67.2 57.6v19.2zM512 312c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-64c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-64c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16z"
                 fill="currentColor"></path>
@@ -49,12 +49,16 @@
 
         </n-flex>
         <n-p class="n-text-stylel n-text-align-style">
-          I am a third-year PhD student at Department of Computing, <n-text type="info">The Hong Kong Polytechnic
-            University (PolyU)</n-text>, advised
-          by Prof. Maggie Wenjie Li. Before that, I received my MSc and BEng degrees from the School of Computer Science
-          and Engineering, South China University of Technology, in 2020 and 2017, respectively. During the 2018 to 2019
-          period, I was fortunate to be co-advised by Prof. Min Yang at SIAT, Chinese Academy of Sciences.
+          I am currently actively looking for PhD opportunities (overseas only).
+          I focus on AI fairness, language modeling, quantum theory and any other relevant work.
+          Previously, I obtained my master's and bachelor's degrees from <n-text type="info">Tianjin University</n-text>
+          and <n-text type="info">Tianjin Normal University</n-text>, respectively.
+          In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time (during
+          my master's degree) development experience.
+          I have worked as a technical core in our team and I have extensive programming experience.
+          Please do not hesitate to contact me if you are interested in working with me on some interesting projects.
         </n-p>
+        <n-divider />
         <span class="main-titile">Research</span>
         <n-p class="n-text-stylel n-text-align-style">
           I have broad interests in Natural Language Processing (NLP) and Conversational AI. Especially, I focus on the
@@ -78,6 +82,7 @@
             from situated communications (e.g., situated dialogues).
           </li>
         </ul>
+        <n-divider />
         <span class="main-titile">Publications</span>
         <ul class="n-title-stylel">
           <li>
@@ -140,11 +145,55 @@
 
 
 
+        <n-divider />
 
         <span class="main-titile">Experiences</span>
+        <ul class="n-text-stylel">
+          <li>
+
+            Mar. 2023 - Now: Independent Researcher - <n-text italic>Research social biases in language modeling and look
+              for opportunities for a PhD position.</n-text>
+
+          </li>
+          <li>
+
+            Sept. 2019 - Mar. 2023: Senior Software Engineer (part-time) - <n-text italic>Technical Support at Antrou Co.
+              Ltd.</n-text>
+
+          </li>
+          <li>
+
+            Jul. 2017 - Sept. 2019: Senior Software Engineer - <n-text italic>Geographical Information System base on
+              Three.js and Security Management System for Petrochemical Indus-
+              try at Antrou Co. Ltd.</n-text>
+
+          </li>
+        </ul>
+        <n-divider />
+        <span class="main-titile">Technical Skills</span>
+        <ul class="n-text-stylel">
+          <li>Programming: Python, PyTorch, Java, Javascript, CSS</li>
+          <li>
+            Techniques: Natural Language Processing, Deep Learning, Machine Learning, Quantum Theory, WEB Application
+            Development
+          </li>
+        </ul>
+        <n-divider />
+
+        <span class="main-titile">Links</span>
+        <ul class="n-text-stylel">
+          <li>Personal Blog: <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a></li>
+          <li>Github: <n-a href="https://github.com/nlply">https://github.com/nlply</n-a></li>
+          <li>Huggingface: <n-a href="https://huggingface.co/lauyon">https://huggingface.co/lauyon</n-a></li>
+        </ul>
+
+
+        <n-divider />
 
         <span class="main-titile">Reviewer</span>
-
+        <ul class="n-text-stylel">
+          <li>2023: EMNLP, ACL</li>
+        </ul>
       </div>
 
 
@@ -165,22 +214,7 @@
 export default {
   data() {
     return {
-      publications: [
-        {
-          title: 'Mining Effective Features Using Quantum Entropy for Humor Recognition',
-          authers: 'Yang Liu, Yuexian Hou',
-          bold_auther: 'Yang Liu',
-          conference: 'EACL',
-          year: '2023'
-        },
-        {
-          title: 'Mining Effective Features Using Quantum Entropy for Humor Recognition',
-          authers: '<n-text strong>Yang Liu</n-text>, Yuexian Hou',
-          bold_auther: 'Yang Liu',
-          conference: 'EACL',
-          year: '2023'
-        },
-      ]
+      
     }
   }
 }
@@ -236,5 +270,13 @@ export default {
 .hover-style {
   /* text-decoration: underline; */
   cursor: pointer;
+}
+
+img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 300px;
+  height: 300px;
+  margin-top: 50px;
 }
 </style>
