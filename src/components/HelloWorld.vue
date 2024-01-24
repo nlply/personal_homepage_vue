@@ -1,199 +1,209 @@
 <template>
-  <n-row gutter="12">
-    <n-col :span="6">
-      <div class="light-green" />
-    </n-col>
-    <n-col :span="12">
-      <div style="text-align: left;">
-        <div style="text-align: center;padding-bottom: 20px;">
-          <img alt="avatar" src="../assets/avatar.png">
+  <n-flex justify="center" style="width:100%;padding-bottom: 50px;">
+    <n-flex justify="center" style="width:90%;">
+      <n-flex :style="{ width: computedWidth + 'px', 'text-align': center, 'max-width': '100%' }">
+        <n-flex vertical>
+          <div><img alt="avatar" src="../assets/avatar.png"></div>
           <p style="font-family: 'Times New Roman', Times, serif;font-size: 40px;font-weight: bold;color: #000;">Yang Liu
           </p>
-          <span class="n-text-stylel">Independent Researcher</span>
+          <span class="text-style">Independent Researcher</span>
           <n-p>
-            <n-a class="n-text-stylel" href="mailto:yangliu.nlp@gmail.com" target="_blank">
+            <n-a class="text-style" href="mailto:yangliu.nlp@gmail.com" target="_blank">
               Email: yangliu.nlp@gmail.com
             </n-a>
           </n-p>
-
-        </div>
-        <n-flex justify="center">
-
-          <n-icon size="40" style="cursor: pointer" @click="pdf">
-            <At />
-          </n-icon>
-          <n-icon size="40" style="cursor: pointer" @click="github">
-            <GithubAlt />
-          </n-icon>
-          <n-icon size="40" style="cursor: pointer" @click="twitter">
-            <Twitter />
-          </n-icon>
-          <!-- <n-icon size="40" style="cursor: pointer" @click="google">
+          <n-flex justify="center">
+            <n-icon size="40" style="cursor: pointer" @click="pdf">
+              <At />
+            </n-icon>
+            <n-icon size="40" style="cursor: pointer" @click="github">
+              <GithubAlt />
+            </n-icon>
+            <n-icon size="40" style="cursor: pointer" @click="twitter">
+              <Twitter />
+            </n-icon>
+            <!-- <n-icon size="40" style="cursor: pointer" @click="google">
             <Google />
           </n-icon> -->
-          
-        
-
+          </n-flex>
+          <n-flex>
+            <n-p class="text-style text-align-style">
+              I am currently actively looking for PhD opportunities.
+              I focus on AI fairness, language modeling, quantum theory and any other relevant work.
+              Previously, I obtained my master's and bachelor's degrees from <n-text type="info">Tianjin
+                University</n-text>
+              and <n-text type="info">Tianjin Normal University</n-text>, respectively.
+              In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time
+              (during
+              my master's degree) development experience.
+              I have worked as a technical core in our team and I have extensive programming experience.
+              Please do not hesitate to contact me if you are interested in working with me on some interesting projects.
+            </n-p>
+          </n-flex>
         </n-flex>
-        <n-p class="n-text-stylel n-text-align-style">
-          I am currently actively looking for PhD opportunities.
-          I focus on AI fairness, language modeling, quantum theory and any other relevant work.
-          Previously, I obtained my master's and bachelor's degrees from <n-text type="info">Tianjin University</n-text>
-          and <n-text type="info">Tianjin Normal University</n-text>, respectively.
-          In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time (during
-          my master's degree) development experience.
-          I have worked as a technical core in our team and I have extensive programming experience.
-          Please do not hesitate to contact me if you are interested in working with me on some interesting projects.
-        </n-p>
         <n-divider />
-        <span class="main-titile">Research</span>
-        <n-p class="n-text-stylel n-text-align-style">
-          I have a broad interest in Natural Language Processing (NLP). I am particularly interested in the following
-          directions:
-        </n-p>
-
-        <ul class="n-text-stylel">
-          <li>
-            Fairness in Artificial Intelligence (AI). I work on fairness in AI, investigating potential harms to protect
-            target groups from harm. </li>
-          <li>
-            Quantum Information Theory. Quantum theory exhibits very unusual properties, and I am dedicated to using
-            quantum theory to solve problems in AI.
-          </li>
-          <li>
-            Recently, LLMs have developed significantly rapidly, and I also researched the fairness of LLMs for AI.
-          </li>
-        </ul>
-        <n-divider />
-        <span class="main-titile">Publications</span>
-        <ul class="n-title-stylel">
-          <li>
-            <div>
-              <n-text class="hover-style" type="success">Quantifying Stereotypes in Language</n-text> <span
-                class="n-text-bold-stylel">(single-authored work)</span>
-              <br />
-              <span strong class="n-text-bold-stylel">Yang Liu</span>
-              <br />
-              <n-text italic class="n-text-stylel">EACL, 2024</n-text>
-            </div>
-            <!-- <n-hr /> -->
-
-          </li>
-
-          <li>
-            <div>
-              <n-text class="hover-style" type="success">Robust Evaluation Measures for Evaluating Social Biases in
-                Masked
-                Language Models</n-text> <span class="n-text-bold-stylel">(single-authored work)</span>
-              <br />
-              <span class="n-text-bold-stylel">Yang Liu</span>
-              <br />
-              <n-text italic class="n-text-stylel">AAAI, 2024</n-text>
-            </div>
-            <!-- <n-hr /> -->
-
-          </li>
-
-          <li>
-
-            <div>
-              <n-text class="hover-style" type="success">Syntax-Aware Complex-Valued Neural Machine
-                Translation</n-text>
-              <br />
-              <span strong class="n-text-bold-stylel">Yang Liu</span><span class="n-text-stylel">, Yuexian Hou</span>
-              <br />
-              <n-text italic class="n-text-stylel">ICANN, 2023</n-text>
-            </div>
-            <!-- <n-hr /> -->
-          </li>
-
-          <li>
+        <n-flex id="research">
+          <n-flax class="text-align-style">
+            <p class="main-titile">Research</p>
+            <n-p class="text-style text-align-style">
+              I have a broad interest in Natural Language Processing (NLP). I am particularly interested in the following
+              directions:
+            </n-p>
+            <ul class="text-style">
+              <li>
+                Fairness in Artificial Intelligence (AI). I work on fairness in AI, investigating potential harms to
+                protect
+                target groups from harm. </li>
+              <li>
+                Quantum Information Theory. Quantum theory exhibits very unusual properties, and I am dedicated to using
+                quantum theory to solve problems in AI.
+              </li>
+              <li>
+                Recently, LLMs have developed significantly rapidly, and I also researched the fairness of LLMs for AI.
+              </li>
+            </ul>
 
 
-            <div>
-              <n-text class="hover-style" type="success">Mining Effective Features Using Quantum Entropy for Humor
-                Recognition</n-text>
-              <br />
-              <span class="n-text-bold-stylel">Yang Liu</span><span class="n-text-stylel">, Yuexian Hou</span>
-              <br />
-              <n-text italic class="n-text-stylel">Findings of the Association for Computational Linguistics: EACL
-                2023</n-text>
-            </div>
-
-            <!-- <n-hr /> -->
-          </li>
-        </ul>
+            <n-divider />
 
 
+            <p class="main-titile">Publications</p>
+            <ul class="text-style">
+              <li>
+                <div>
+                  <n-text class="hover-style title-style" type="success">Quantifying Stereotypes in Language</n-text>
+                  <span class="text-bold-style title-style">(single-authored work)</span>
+                  <n-flex>
+                    <div class="text-bold-style">Yang Liu</div>
+                  </n-flex>
+                  <n-text italic>EACL, 2024</n-text>
+                </div>
+              </li>
 
+              <li>
+                <div>
+                  <n-text class="hover-style title-style" type="success">Robust Evaluation Measures for Evaluating Social
+                    Biases in
+                    Masked
+                    Language Models</n-text> <span class="text-bold-style title-style">(single-authored work)</span>
+                  <n-flex>
+                    <div class="text-bold-style">Yang Liu</div>
+                  </n-flex>
+                  <n-text italic>AAAI, 2024</n-text>
+                  <br />
+                  <n-a href="https://github.com/nlply/robust-bias-evaluation-measures" class="hover-style"
+                    style="text-decoration: none">code</n-a><n-divider vertical />
+                  <n-a href="https://github.com/nlply/robust-bias-evaluation-measures" class="hover-style"
+                    style="text-decoration: none">slide</n-a><n-divider vertical />
+                  <n-a href="https://github.com/nlply/robust-bias-evaluation-measures" class="hover-style"
+                    style="text-decoration: none">poster</n-a>
+                </div>
+              </li>
 
+              <li>
+                <div>
+                  <n-text class="hover-style title-style" type="success">Syntax-Aware Complex-Valued Neural Machine
+                    Translation</n-text>
+                  <br />
+                  <n-flex>
+                    <div class="text-bold-style">Yang Liu</div>
+                    <div>, Yuexian Hou</div>
+                  </n-flex>
 
-        <n-divider />
+                  <n-text italic>ICANN, 2023</n-text>
+                </div>
+              </li>
 
-        <span class="main-titile">Experiences</span>
-        <ul class="n-text-stylel">
-          <li>
-
-            Mar. 2023 - Now: Independent Researcher - <n-text italic>Research social biases in language modeling and look
-              for opportunities for a PhD position.</n-text>
-
-          </li>
-          <li>
-
-            Sept. 2019 - Mar. 2023: Senior Software Engineer (part-time) - <n-text italic>Technical Support at Antrou Co.
-              Ltd.</n-text>
-
-          </li>
-          <li>
-
-            Jul. 2017 - Sept. 2019: Senior Software Engineer - <n-text italic>Geographical Information System base on
-              Three.js and Security Management System for Petrochemical Indus-
-              try at Antrou Co. Ltd.</n-text>
-
-          </li>
-        </ul>
-        <n-divider />
-        <span class="main-titile">Technical Skills</span>
-        <ul class="n-text-stylel">
-          <li>Programming: Python, PyTorch, Java, Javascript, CSS</li>
-          <li>
-            Techniques: Natural Language Processing, Deep Learning, Machine Learning, Quantum Theory, WEB Application
-            Development
-          </li>
-        </ul>
-        <n-divider />
-
-        <span class="main-titile">Links</span>
-        <ul class="n-text-stylel">
-          <li>Personal Blog: <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a></li>
-          <li>Github: <n-a href="https://github.com/nlply">https://github.com/nlply</n-a></li>
-          <li>Huggingface: <n-a href="https://huggingface.co/lauyon">https://huggingface.co/lauyon</n-a></li>
-        </ul>
-
-
-        <n-divider />
-
-        <span class="main-titile">Reviewer</span>
-        <ul class="n-text-stylel">
-          <li>2023: EMNLP, ACL</li>
-        </ul>
-      </div>
+              <li>
+                <div>
+                  <n-text class="hover-style title-style" type="success">Mining Effective Features Using Quantum Entropy
+                    for
+                    Humor
+                    Recognition</n-text>
+                  <n-flex>
+                    <div class="text-bold-style">Yang Liu</div>
+                    <div>, Yuexian Hou</div>
+                  </n-flex>
+                  <n-text italic>Findings of the Association for Computational Linguistics: EACL
+                    2023</n-text>
+                </div>
+              </li>
+            </ul>
 
 
 
+            <n-divider />
 
-    </n-col>
-    <n-col :span="6">
-      <div class="light-green" />
-    </n-col>
+
+            <p class="main-titile">Experiences</p>
+            <ul class="text-style">
+              <li>
+
+                <n-text>Mar. 2023 - Now: </n-text><n-text underline>Independent Researcher</n-text><n-text italic> -
+                  Research social biases in language modeling and
+                  look
+                  for opportunities for a PhD position.</n-text>
+
+              </li>
+              <li>
+
+                <n-text>Sept. 2019 - Mar. 2023: </n-text><n-text underline>Senior Software Engineer
+                  (part-time)</n-text><n-text italic> - Technical Support at Antrou
+                  Co.
+                  Ltd.</n-text>
+
+              </li>
+              <li>
+
+                <n-text>Jul. 2017 - Sept. 2019: </n-text><n-text underline>Senior Software Engineer</n-text><n-text
+                  italic>
+                  - Geographical Information System base on
+                  Three.js and Security Management System for Petrochemical Indus-
+                  try at Antrou Co. Ltd.</n-text>
+
+              </li>
+            </ul>
+
+            <n-divider />
+
+            <p class="main-titile">Technical Skills</p>
+            <ul class="text-style">
+              <li>Programming: Python, PyTorch, Java, Javascript, CSS</li>
+              <li>
+                Techniques: Natural Language Processing, Deep Learning, Machine Learning, Quantum Theory, WEB
+                Application
+                Development
+              </li>
+            </ul>
+            <n-divider />
+
+            <p class="main-titile">Links</p>
+            <ul class="text-style">
+              <li>Personal Blog: <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a></li>
+              <li>Github: <n-a href="https://github.com/nlply">https://github.com/nlply</n-a></li>
+              <li>Huggingface: <n-a href="https://huggingface.co/lauyon">https://huggingface.co/lauyon</n-a></li>
+            </ul>
+
+            <n-divider />
+
+            <p class="main-titile">Reviewer</p>
+            <ul class="text-style">
+              <li>2023: EMNLP, ACL</li>
+            </ul>
+
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px">2024 © Yang Liu | Last updated: Jan. 2024</p>
+          </n-flax>
+        </n-flex>
+      </n-flex>
+    </n-flex>
+
     <n-back-top :right="100" />
-
-  </n-row>
+  </n-flex>
 </template>
 
 <script>
 
-import { At,Google,Twitter,GithubAlt } from "@vicons/fa";
+import { At, Google, Twitter, GithubAlt } from "@vicons/fa";
 
 import { defineComponent } from 'vue'
 
@@ -203,6 +213,11 @@ export default defineComponent({
     Google,
     Twitter,
     GithubAlt
+  },
+  computed: {
+    computedWidth() {
+      return window.innerWidth / 2;
+    },
   },
   setup() {
     const pdf_url = '../../resume.pdf'
@@ -232,27 +247,25 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.n-title-stylel {
+.title-style {
   font-size: 26px;
-  /* font-weight: bold; */
   font-family: 'Times New Roman', Times, serif;
-
 }
 
-.n-text-stylel {
+.text-style {
   font-size: 22px;
   font-family: 'Times New Roman', Times, serif;
 }
 
-.n-text-bold-stylel {
-  font-size: 22px;
+.text-bold-style {
+  /* font-size: 22px; */
   font-weight: bold;
   font-family: 'Times New Roman', Times, serif;
 }
 
-.n-text-align-style {
+.text-align-style {
   text-align: justify;
-  direction: ltr;
+  /* direction: ltr; */
 }
 
 .custom-font {
@@ -284,5 +297,16 @@ img {
   width: 300px;
   height: 300px;
   margin-top: 50px;
+}
+
+/* split */
+
+
+.n-divider.n-divider--vertical {
+  display: inline-block;
+  height: 1.2em;
+  margin: 0 8px;
+  vertical-align: middle;
+  width: 2px;
 }
 </style>
