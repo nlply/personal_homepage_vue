@@ -11,8 +11,8 @@
           </p>
           <span class="n-text-stylel">Independent Researcher</span>
           <n-p>
-            <n-a class="n-text-stylel" href="mailto:lauyon@tju.edu.cn" target="_blank">
-              Email: lauyon@tju.edu.cn
+            <n-a class="n-text-stylel" href="mailto:yangliu.nlp@gmail.com" target="_blank">
+              Email: yangliu.nlp@gmail.com
             </n-a>
           </n-p>
 
