@@ -9,7 +9,7 @@
           <img alt="avatar" src="../assets/avatar.png">
           <p style="font-family: 'Times New Roman', Times, serif;font-size: 40px;font-weight: bold;color: #000;">Yang Liu
           </p>
-          <n-tag class="n-text-stylel">Independent Researcher</n-tag>
+          <span class="n-text-stylel">Independent Researcher</span>
           <n-p>
             <n-a class="n-text-stylel" href="mailto:lauyon@tju.edu.cn" target="_blank">
               Email: lauyon@tju.edu.cn
@@ -49,7 +49,7 @@
 
         </n-flex>
         <n-p class="n-text-stylel n-text-align-style">
-          I am currently actively looking for PhD opportunities (overseas only).
+          I am currently actively looking for PhD opportunities.
           I focus on AI fairness, language modeling, quantum theory and any other relevant work.
           Previously, I obtained my master's and bachelor's degrees from <n-text type="info">Tianjin University</n-text>
           and <n-text type="info">Tianjin Normal University</n-text>, respectively.
@@ -61,25 +61,17 @@
         <n-divider />
         <span class="main-titile">Research</span>
         <n-p class="n-text-stylel n-text-align-style">
-          I have broad interests in Natural Language Processing (NLP) and Conversational AI. Especially, I focus on the
-          following directions:
+          I have a broad interest in Natural Language Processing (NLP). I am particularly interested in the following directions:
         </n-p>
 
         <ul class="n-text-stylel">
           <li>
-            Interactive dialogue systems (e.g., goal/target-directed dialogues, task-oriented dialogues). I am dedicated
-            to
-            empowering machines to interact with humans through natural, coherent, and proactive conversations.
+            Fairness in Artificial Intelligence (AI). I work on fairness in AI, investigating potential harms to protect target groups from harm.          </li>
+          <li>
+            Quantum Information Theory. Quantum theory exhibits very unusual properties, and I am dedicated to using quantum theory to solve problems in AI.
           </li>
           <li>
-            Natural language generation. I am interested in how world knowledge (e.g., commonsense, factual, physical,
-            and
-            social knowledge) can be grounded and incorporated in natural language generation.
-          </li>
-          <li>
-            Situated and multimodal interactions. I am interested in human-AI collaborations on complex tasks and
-            learning
-            from situated communications (e.g., situated dialogues).
+            Recently, LLMs have developed significantly rapidly, and I also researched the fairness of LLMs for AI.
           </li>
         </ul>
         <n-divider />
