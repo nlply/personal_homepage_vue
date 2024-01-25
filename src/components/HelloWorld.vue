@@ -72,7 +72,7 @@
               <li>
                 <div>
                   <n-text class="hover-style title-style" type="success">Quantifying Stereotypes in Language</n-text>
-                  <span class="text-bold-style title-style">(single-authored work)</span>
+                  <span class="text-bold-style title-style"> (single-authored work)</span>
                   <n-flex>
                     <div class="text-bold-style">Yang Liu</div>
                   </n-flex>
@@ -85,7 +85,8 @@
                   <n-text class="hover-style title-style" type="success">Robust Evaluation Measures for Evaluating Social
                     Biases in
                     Masked
-                    Language Models</n-text> <span class="text-bold-style title-style">(single-authored work)</span>
+                    Language Models</n-text>
+                    <span class="text-bold-style title-style"> (single-authored work)</span>
                   <n-flex>
                     <div class="text-bold-style">Yang Liu</div>
                   </n-flex>
@@ -190,8 +191,9 @@
             <ul class="text-style">
               <li>2023: EMNLP, ACL</li>
             </ul>
+            <n-divider />
 
-            <p style="text-align: center;color: #c0c0c0;font-size: 18px">2024 © Yang Liu | Last updated: Jan. 2024</p>
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 © Yang Liu | Last updated: Jan. 2024</p>
           </n-flax>
         </n-flex>
       </n-flex>
@@ -308,5 +310,10 @@ img {
   margin: 0 8px;
   vertical-align: middle;
   width: 2px;
+}
+
+.clustrmaps {
+  width: 300px;
+  height: 100px;
 }
 </style>
