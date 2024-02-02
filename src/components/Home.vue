@@ -212,7 +212,7 @@ export default defineComponent({
         resources: [
           {
             name: 'code',
-            url: 'https://github.com/nlply/robust-bias-evaluation-measures'
+            url: 'https://github.com/nlply/quantifying-stereotypes-in-language'
           },
           // {
           //   name: 'slide',
