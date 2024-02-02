@@ -68,67 +68,36 @@
 
 
             <p class="main-titile">Publications</p>
+
+
             <ul class="text-style">
-              <li>
+
+              <li v-for="paper in papers">
                 <div>
-                  <n-text class="hover-style title-style" type="success">Quantifying Stereotypes in Language</n-text>
-                  <span class="text-bold-style title-style"> (single-authored work)</span>
-                  <n-flex>
-                    <div class="text-bold-style">Yang Liu</div>
+                  <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL" target="_blank">{{ paper.title }}</n-a>
+                  <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
+
+                  <span v-if="paper.titleExplain" class="text-bold-style title-style">{{ ' ' + '(' + paper.titleExplain +
+                    ')' }}</span>
+                  <n-flex style="gap:0 0!important">
+                    <div v-for="(auther, index) in paper.authers">
+                      <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
+                      <span v-if="index !== paper.authers.length - 1">
+                        <span v-if="index === paper.authers.length - 2">&nbsp;and&nbsp;</span>
+                        <span v-else>,&nbsp;</span>
+                      </span>
+                    </div>
                   </n-flex>
-                  <n-text italic>EACL, 2024</n-text>
+                  <n-text italic>{{ paper.conference }}</n-text>
+                  <br>
+                  <span v-for="(resource, index) in paper.resources">
+                    <n-a :href="resource.url" class="hover-style" style="text-decoration: none" target="_blank">{{
+                      resource.name }}</n-a>
+                    <n-divider v-if="index !== paper.resources.length - 1" vertical />
+                  </span>
                 </div>
               </li>
 
-              <li>
-                <div>
-                  <n-text class="hover-style title-style" type="success">Robust Evaluation Measures for Evaluating Social
-                    Biases in
-                    Masked
-                    Language Models</n-text>
-                    <span class="text-bold-style title-style"> (single-authored work)</span>
-                  <n-flex>
-                    <div class="text-bold-style">Yang Liu</div>
-                  </n-flex>
-                  <n-text italic>AAAI, 2024</n-text>
-                  <br />
-                  <n-a href="https://github.com/nlply/robust-bias-evaluation-measures" class="hover-style"
-                    style="text-decoration: none">code</n-a><n-divider vertical />
-                  <n-a href="https://github.com/nlply/robust-bias-evaluation-measures" class="hover-style"
-                    style="text-decoration: none">slide</n-a><n-divider vertical />
-                  <n-a href="https://github.com/nlply/robust-bias-evaluation-measures" class="hover-style"
-                    style="text-decoration: none">poster</n-a>
-                </div>
-              </li>
-
-              <li>
-                <div>
-                  <n-text class="hover-style title-style" type="success">Syntax-Aware Complex-Valued Neural Machine
-                    Translation</n-text>
-                  <br />
-                  <n-flex>
-                    <div class="text-bold-style">Yang Liu</div>
-                    <div>, Yuexian Hou</div>
-                  </n-flex>
-
-                  <n-text italic>ICANN, 2023</n-text>
-                </div>
-              </li>
-
-              <li>
-                <div>
-                  <n-text class="hover-style title-style" type="success">Mining Effective Features Using Quantum Entropy
-                    for
-                    Humor
-                    Recognition</n-text>
-                  <n-flex>
-                    <div class="text-bold-style">Yang Liu</div>
-                    <div>, Yuexian Hou</div>
-                  </n-flex>
-                  <n-text italic>Findings of the Association for Computational Linguistics: EACL
-                    2023</n-text>
-                </div>
-              </li>
             </ul>
 
 
@@ -159,8 +128,7 @@
                 <n-text>Jul. 2017 - Sept. 2019: </n-text><n-text underline>Senior Software Engineer</n-text><n-text
                   italic>
                   - Geographical Information System base on
-                  Three.js and Security Management System for Petrochemical Indus-
-                  try at Antrou Co. Ltd.</n-text>
+                  Three.js and Security Management System for Petrochemical Industry at Antrou Co. Ltd.</n-text>
 
               </li>
             </ul>
@@ -193,7 +161,18 @@
             </ul>
             <n-divider />
 
-            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 © Yang Liu | Last updated: Jan. 2024</p>
+            <p class="main-titile">Useful Resources</p>
+            <ul class="text-style">
+              <li>ACL Pub Check: <n-a
+                  href="https://huggingface.co/spaces/teelinsan/aclpubcheck">https://huggingface.co/spaces/teelinsan/aclpubcheck</n-a>
+              </li>
+              <li>ColorSpace: <n-a href="https://mycolor.space">https://mycolor.space</n-a></li>
+              <li>HEX to CMYK: <n-a href="https://g.co/kgs/J1DzL4w">https://g.co/kgs/J1DzL4w</n-a></li>
+            </ul>
+            <n-divider />
+
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 © Yang Liu | Last
+              updated: Jan. 2024</p>
           </n-flax>
         </n-flex>
       </n-flex>
@@ -207,7 +186,7 @@
 
 import { At, Google, Twitter, GithubAlt } from "@vicons/fa";
 
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   components: {
@@ -222,9 +201,102 @@ export default defineComponent({
     },
   },
   setup() {
-    const pdf_url = '../../resume.pdf'
+    const papers = ref([
+      {
+        title: 'Quantifying Stereotypes in Language',
+        titleExplain: 'single-authored work',
+        titleURL: 'https://arxiv.org/abs/2401.15535',
+        authers: ['Yang Liu'],
+        boldAuther: 'Yang Liu',
+        conference: 'The 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL), 2024',
+        resources: [
+          {
+            name: 'code',
+            url: 'https://github.com/nlply/robust-bias-evaluation-measures'
+          },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
+      {
+        title: 'Robust Evaluation Measures for Evaluating Social Biases in Masked Language Models',
+        titleExplain: 'single-authored work',
+        titleURL: 'https://arxiv.org/abs/2401.11601',
+        authers: ['Yang Liu'],
+        boldAuther: 'Yang Liu',
+        conference: 'Proceedings of the 36th AAAI Conference on Artificial Intelligence (AAAI), 2024',
+        resources: [
+          {
+            name: 'code',
+            url: 'https://github.com/nlply/robust-bias-evaluation-measures'
+          },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
+      {
+        title: 'Syntax-Aware Complex-Valued Neural Machine Translation',
+        titleExplain: '',
+        titleURL: 'https://arxiv.org/pdf/2307.08586.pdf',
+        authers: ['Yang Liu', 'Yuexian Hou'],
+        boldAuther: 'Yang Liu',
+        conference: 'International Conference on Artificial Neural Networks (ICANN), 2023',
+        resources: [
+          // {
+          //   name: 'code',
+          //   url: ''
+          // },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
+      {
+        title: 'Mining Effective Features Using Quantum Entropy for Humor Recognition',
+        titleExplain: 'short paper',
+        titleURL: 'https://aclanthology.org/2023.findings-eacl.152/',
+        authers: ['Yang Liu', 'Yuexian Hou'],
+        boldAuther: 'Yang Liu',
+        conference: 'The 17th Conference of the European Chapter of the Association for Computational Linguistics (Findings: EACL), 2023',
+        resources: [
+          {
+            name: 'code',
+            url: 'https://github.com/nlply/EACL2023-QE-Features'
+          },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      }
+    ])
 
+
+    // resume
+    const pdf_url = '../../resume.pdf'
     return {
+      papers,
       At,
       Google,
       Twitter,
@@ -250,12 +322,12 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .title-style {
-  font-size: 26px;
+  font-size: 22px;
   font-family: 'Times New Roman', Times, serif;
 }
 
 .text-style {
-  font-size: 22px;
+  font-size: 20px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -284,12 +356,12 @@ export default defineComponent({
 
 .hover-style:hover {
   color: black;
-  /* text-decoration: none; */
+  text-decoration: none;
 
 }
 
 .hover-style {
-  /* text-decoration: underline; */
+  text-decoration: none;
   cursor: pointer;
 }
 
