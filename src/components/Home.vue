@@ -162,7 +162,7 @@
             <n-divider />
 
             <p class="main-titile">Useful Resources</p>
-            <ul class="text-style">
+            <ul class="text-style word-break">
               <li>ACL Pub Check: <n-a
                   href="https://huggingface.co/spaces/teelinsan/aclpubcheck">https://huggingface.co/spaces/teelinsan/aclpubcheck</n-a>
               </li>
@@ -177,7 +177,8 @@
         </n-flex>
       </n-flex>
     </n-flex>
-
+   
+    
     <n-back-top :right="100" />
   </n-flex>
 </template>
@@ -339,7 +340,21 @@ export default defineComponent({
 
 .text-align-style {
   text-align: justify;
+ 
   /* direction: ltr; */
+}
+
+.word-break{
+  word-break: break-all;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  word-wrap: break-word; 
+}
+
+.text-align-style::first-letter {
+  text-transform: capitalize;
 }
 
 .custom-font {
