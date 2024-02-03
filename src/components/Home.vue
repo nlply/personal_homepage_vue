@@ -1,12 +1,13 @@
 <template>
   <n-flex justify="center" style="width:100%;padding-bottom: 50px;">
-    <n-flex justify="center" style="width:90%;">
+    <n-flex justify="center">
       <n-flex :style="{ width: computedWidth + 'px', 'text-align': center, 'max-width': '100%' }">
         <n-flex vertical>
-          <div><img alt="avatar" src="../assets/avatar.png"></div>
-          <p style="font-family: 'Times New Roman', Times, serif;font-size: 40px;font-weight: bold;color: #000;">Yang Liu
-          </p>
-          <span class="text-style">Independent Researcher</span>
+          <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
+          <span style="font-family: 'Times New Roman', Times, serif;font-size: 40px;font-weight: bold;color: #000;">Yang
+            Liu
+          </span>
+          <span class="text-style" style="color: darkgray;">Independent Researcher</span>
           <n-p>
             <n-a class="text-style" href="mailto:yangliu.nlp@gmail.com" target="_blank">
               Email: yangliu.nlp@gmail.com
@@ -41,14 +42,15 @@
             </n-p>
           </n-flex>
         </n-flex>
-        <n-divider />
-        <n-flex id="research">
+        <n-flex>
           <n-flax class="text-align-style">
-            <p class="main-titile">Research</p>
-            <n-p class="text-style text-align-style">
+            <n-divider />
+
+            <p class="main-titile">🧑‍🔬Research</p>
+            <span class="text-style">
               I have a broad interest in Natural Language Processing (NLP). I am particularly interested in the following
               directions:
-            </n-p>
+            </span>
             <ul class="text-style">
               <li>
                 Fairness in Artificial Intelligence (AI). I work on fairness in AI, investigating potential harms to
@@ -67,14 +69,15 @@
             <n-divider />
 
 
-            <p class="main-titile">Publications</p>
+            <p class="main-titile">✍Publications</p>
 
 
             <ul class="text-style">
 
               <li v-for="paper in papers">
                 <div>
-                  <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL" target="_blank">{{ paper.title }}</n-a>
+                  <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
+                    target="_blank">{{ paper.title }}</n-a>
                   <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
 
                   <span v-if="paper.titleExplain" class="text-bold-style title-style">{{ ' ' + '(' + paper.titleExplain +
@@ -105,7 +108,7 @@
             <n-divider />
 
 
-            <p class="main-titile">Experiences</p>
+            <p class="main-titile">💼Experiences</p>
             <ul class="text-style">
               <li>
 
@@ -135,7 +138,7 @@
 
             <n-divider />
 
-            <p class="main-titile">Technical Skills</p>
+            <p class="main-titile">🎨Technical Skills</p>
             <ul class="text-style">
               <li>Programming: Python, PyTorch, Java, Javascript, CSS</li>
               <li>
@@ -146,7 +149,7 @@
             </ul>
             <n-divider />
 
-            <p class="main-titile">Links</p>
+            <p class="main-titile">🔗Links</p>
             <ul class="text-style">
               <li>Personal Blog: <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a></li>
               <li>Github: <n-a href="https://github.com/nlply">https://github.com/nlply</n-a></li>
@@ -155,30 +158,35 @@
 
             <n-divider />
 
-            <p class="main-titile">Reviewer</p>
+            <p class="main-titile">📝Reviewer</p>
             <ul class="text-style">
               <li>2023: EMNLP, ACL</li>
             </ul>
             <n-divider />
 
-            <p class="main-titile">Useful Resources</p>
+            <p class="main-titile">📚Useful Resources</p>
             <ul class="text-style word-break">
-              <li>ACL Pub Check: <n-a
+              <li>ACL Anthology: <n-a target="_blank" href="https://aclanthology.org">https://aclanthology.org</n-a>
+              </li>
+              <li>ACL Pub Check: <n-a target="_blank"
                   href="https://huggingface.co/spaces/teelinsan/aclpubcheck">https://huggingface.co/spaces/teelinsan/aclpubcheck</n-a>
               </li>
-              <li>ColorSpace: <n-a href="https://mycolor.space">https://mycolor.space</n-a></li>
-              <li>HEX to CMYK: <n-a href="https://g.co/kgs/J1DzL4w">https://g.co/kgs/J1DzL4w</n-a></li>
+              <li>AI Conference Deadlines: <n-a target="_blank" href="https://aideadlin.es">https://aideadlin.es</n-a>
+              </li>
+              <li>ColorSpace: <n-a target="_blank" href="https://mycolor.space">https://mycolor.space</n-a></li>
+              <li>HEX to CMYK: <n-a target="_blank" href="https://g.co/kgs/J1DzL4w">https://g.co/kgs/J1DzL4w</n-a></li>
             </ul>
             <n-divider />
 
-            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 © Yang Liu | Last
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 © <n-a
+                href="https://nlply.tech/">Yang Liu</n-a> Developed with <n-a href="https://vuejs.org/">VUE</n-a> | Last
               updated: Jan. 2024</p>
           </n-flax>
         </n-flex>
       </n-flex>
     </n-flex>
-   
-    
+
+
     <n-back-top :right="100" />
   </n-flex>
 </template>
@@ -335,22 +343,22 @@ export default defineComponent({
 .text-bold-style {
   /* font-size: 22px; */
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Times New Roman', Times, serif; */
 }
 
 .text-align-style {
   text-align: justify;
- 
+
   /* direction: ltr; */
 }
 
-.word-break{
+.word-break {
   word-break: break-all;
   hyphens: auto;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
 
 .text-align-style::first-letter {
@@ -380,11 +388,11 @@ export default defineComponent({
   cursor: pointer;
 }
 
-img {
+.avatar {
   background-size: cover;
   background-repeat: no-repeat;
-  width: 300px;
-  height: 300px;
+  width: 250px;
+  height: 250px;
   margin-top: 50px;
 }
 
