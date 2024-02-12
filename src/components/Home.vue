@@ -120,7 +120,7 @@
               </li>
               <li>
 
-                <n-text>Sept. 2019 - Mar. 2023: </n-text><n-text underline>Senior Software Engineer
+                <n-text>Sept. 2019 - Mar. 2023: </n-text><n-text underline>Full-Stack Software Engineer
                   (part-time)</n-text><n-text italic> - Technical Support at Antrou
                   Co.
                   Ltd.</n-text>
@@ -128,7 +128,7 @@
               </li>
               <li>
 
-                <n-text>Jul. 2017 - Sept. 2019: </n-text><n-text underline>Senior Software Engineer</n-text><n-text
+                <n-text>Jul. 2017 - Sept. 2019: </n-text><n-text underline>Full-Stack Software Engineer</n-text><n-text
                   italic>
                   - Geographical Information System base on
                   Three.js and Security Management System for Petrochemical Industry at Antrou Co. Ltd.</n-text>
@@ -175,6 +175,7 @@
               </li>
               <li>ColorSpace: <n-a target="_blank" href="https://mycolor.space">https://mycolor.space</n-a></li>
               <li>HEX to CMYK: <n-a target="_blank" href="https://g.co/kgs/J1DzL4w">https://g.co/kgs/J1DzL4w</n-a></li>
+              <li>CS Rankings: <n-a target="_blank" href="https://csrankings.org">https://csrankings.org</n-a></li>
             </ul>
             <n-divider />
 
