@@ -4,7 +4,7 @@
       <n-flex :style="{ width: computedWidth + 'px', 'text-align': center, 'max-width': '100%' }">
         <n-flex vertical>
           <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
-          <span style="font-family: 'Times New Roman', Times, serif;font-size: 40px;font-weight: bold;color: #000;">Yang
+          <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang
             Liu
           </span>
           <span class="text-style" style="color: darkgray;">Independent Researcher</span>
@@ -331,14 +331,16 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .title-style {
   font-size: 22px;
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Times New Roman', Times, serif; */
+  font-family: Palatino,"Palatino Linotype","Palatino LT STD","Book Antiqua",Times,"Times New Roman",serif;
 }
 
 .text-style {
   font-size: 20px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Palatino,"Palatino Linotype","Palatino LT STD","Book Antiqua",Times,"Times New Roman",serif;
 }
 
 .text-bold-style {
@@ -369,7 +371,8 @@ export default defineComponent({
 .custom-font {
   /* font-family: 'Times New Roman', Times, serif; */
   /* font-family: Times, serif; */
-  font-family: serif;
+  /* font-family: serif; */
+  font-family: Palatino,"Palatino Linotype","Palatino LT STD","Book Antiqua",Times,"Times New Roman",serif;
 }
 
 .main-titile {
