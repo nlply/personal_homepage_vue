@@ -1,27 +1,37 @@
 <template>
   <n-flex justify="center" style="width:100%;padding-bottom: 50px;">
     <n-flex justify="center">
-      <n-flex :style="{ width: computedWidth + 'px', 'text-align': center, 'max-width': '100%' }">
+      <n-flex :style="{ width: computedWidth + 'px', 'text-align': 'center', 'max-width': '100%' }">
         <n-flex vertical>
           <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
           <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang
             Liu
           </span>
-          <span class="text-style" style="color: darkgray;">Independent Researcher</span>
-          <n-p>
-            <n-a class="text-style" href="mailto:yangliu.nlp@gmail.com" target="_blank">
-              Email: yangliu.nlp@gmail.com
+          <span class="text-style" style="color: darkgray;">Ph.D. candidate at Kyoto University</span>
+          <n-p style="display: flex; justify-content: center;"> <!-- horizontal centering -->
+            <div style="width: fit-content;text-align: left"> <!-- left alignment of two emails  -->
+            <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
+                 target="_blank">
+              <span class="text-bold-style">Email 1</span>: yangliu<span class="text-bold-style">(AT)n</span>, <span
+                class="text-bold-style">(AT)n</span>=@nlp.ist.i.kyoto-u.ac.jp
             </n-a>
+              <br>
+            <n-a class="text-style no-underline" href="mailto:yangliu.nlp@gmail.com"
+                 target="_blank">
+              <span class="text-bold-style">Email 2</span>: yangliu.nlp<span class="text-bold-style">(AT)n</span>, <span
+                class="text-bold-style">(AT)n</span>=@gmail.com
+            </n-a>
+              </div>
           </n-p>
           <n-flex justify="center">
             <n-icon size="40" style="cursor: pointer" @click="pdf">
-              <At />
+              <At/>
             </n-icon>
             <n-icon size="40" style="cursor: pointer" @click="github">
-              <GithubAlt />
+              <GithubAlt/>
             </n-icon>
             <n-icon size="40" style="cursor: pointer" @click="twitter">
-              <Twitter />
+              <Twitter/>
             </n-icon>
             <!-- <n-icon size="40" style="cursor: pointer" @click="google">
             <Google />
@@ -31,20 +41,25 @@
             <n-p class="text-style text-align-style">
               I am currently actively looking for PhD opportunities.
               I focus on AI fairness, language modeling, quantum theory and any other relevant work.
-              Previously, I obtained my master's and bachelor's degrees from <n-text type="info">Tianjin
-                University</n-text>
-              and <n-text type="info">Tianjin Normal University</n-text>, respectively.
+              Previously, I obtained my master's and bachelor's degrees from
+              <n-text type="info">Tianjin
+                University
+              </n-text>
+              and
+              <n-text type="info">Tianjin Normal University</n-text>
+              , respectively.
               In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time
               (during
               my master's degree) development experience.
               I have worked as a technical core in our team and I have extensive programming experience.
-              Please do not hesitate to contact me if you are interested in working with me on some interesting projects.
+              Please do not hesitate to contact me if you are interested in working with me on some interesting
+              projects.
             </n-p>
           </n-flex>
         </n-flex>
         <n-flex>
           <n-flax class="text-align-style">
-            <n-divider />
+            <n-divider/>
 
             <p class="main-titile">🧑‍🔬Research</p>
             <span class="text-style">
@@ -55,7 +70,8 @@
               <li>
                 Fairness in Artificial Intelligence (AI). I work on fairness in AI, investigating potential harms to
                 protect
-                target groups from harm. </li>
+                target groups from harm.
+              </li>
               <li>
                 Quantum Information Theory. Quantum theory exhibits very unusual properties, and I am dedicated to using
                 quantum theory to solve problems in AI.
@@ -66,7 +82,7 @@
             </ul>
 
 
-            <n-divider />
+            <n-divider/>
 
 
             <p class="main-titile">✍Publications</p>
@@ -77,11 +93,14 @@
               <li v-for="paper in papers">
                 <div>
                   <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
-                    target="_blank">{{ paper.title }}</n-a>
+                       target="_blank">{{ paper.title }}
+                  </n-a>
                   <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
 
-                  <span v-if="paper.titleExplain" class="text-bold-style title-style">{{ ' ' + '(' + paper.titleExplain +
-                    ')' }}</span>
+                  <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
+                      ' ' + '(' + paper.titleExplain +
+                      ')'
+                    }}</span>
                   <n-flex style="gap:0 0!important">
                     <div v-for="(auther, index) in paper.authers">
                       <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
@@ -95,8 +114,9 @@
                   <br>
                   <span v-for="(resource, index) in paper.resources">
                     <n-a :href="resource.url" class="hover-style" style="text-decoration: none" target="_blank">{{
-                      resource.name }}</n-a>
-                    <n-divider v-if="index !== paper.resources.length - 1" vertical />
+                        resource.name
+                      }}</n-a>
+                    <n-divider v-if="index !== paper.resources.length - 1" vertical/>
                   </span>
                 </div>
               </li>
@@ -104,39 +124,48 @@
             </ul>
 
 
-
-            <n-divider />
+            <n-divider/>
 
 
             <p class="main-titile">💼Experiences</p>
             <ul class="text-style">
               <li>
 
-                <n-text>Mar. 2023 - Now: </n-text><n-text underline>Independent Researcher</n-text><n-text italic> -
+                <n-text>Mar. 2023 - Now:</n-text>
+                <n-text underline>Independent Researcher</n-text>
+                <n-text italic> -
                   Research social biases in language modeling and
                   look
-                  for opportunities for a PhD position.</n-text>
+                  for opportunities for a PhD position.
+                </n-text>
 
               </li>
               <li>
 
-                <n-text>Sept. 2019 - Mar. 2023: </n-text><n-text underline>Full-Stack Software Engineer
-                  (part-time)</n-text><n-text italic> - Technical Support at Antrou
+                <n-text>Sept. 2019 - Mar. 2023:</n-text>
+                <n-text underline>Full-Stack Software Engineer
+                  (part-time)
+                </n-text>
+                <n-text italic> - Technical Support at Antrou
                   Co.
-                  Ltd.</n-text>
+                  Ltd.
+                </n-text>
 
               </li>
               <li>
 
-                <n-text>Jul. 2017 - Sept. 2019: </n-text><n-text underline>Full-Stack Software Engineer</n-text><n-text
-                  italic>
+                <n-text>Jul. 2017 - Sept. 2019:</n-text>
+                <n-text underline>Full-Stack Software Engineer</n-text>
+                <n-text
+                    italic>
                   - Geographical Information System base on
-                  Three.js and Security Management System for Petrochemical Industry at Antrou Co. Ltd.</n-text>
+                  Three.js and Security Management System for Petrochemical Industry at Antrou Co. Ltd.
+                </n-text>
 
               </li>
             </ul>
 
-            <n-divider />
+            <n-divider/>
 
             <p class="main-titile">🎨Technical Skills</p>
             <ul class="text-style">
@@ -147,56 +176,79 @@
                 Development
               </li>
             </ul>
-            <n-divider />
+            <n-divider/>
 
             <p class="main-titile">🔗Links</p>
             <ul class="text-style">
-              <li>Personal Blog: <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a></li>
-              <li>Github: <n-a href="https://github.com/nlply">https://github.com/nlply</n-a></li>
-              <li>Huggingface: <n-a href="https://huggingface.co/lauyon">https://huggingface.co/lauyon</n-a></li>
+              <li>Personal Blog:
+                <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a>
+              </li>
+              <li>Github:
+                <n-a href="https://github.com/nlply">https://github.com/nlply</n-a>
+              </li>
+              <li>Huggingface:
+                <n-a href="https://huggingface.co/lauyon">https://huggingface.co/lauyon</n-a>
+              </li>
             </ul>
 
-            <n-divider />
+            <n-divider/>
 
             <p class="main-titile">📝Reviewer</p>
             <ul class="text-style">
               <li>2023: EMNLP, ACL</li>
             </ul>
-            <n-divider />
+            <n-divider/>
 
             <p class="main-titile">📚Useful Resources</p>
             <ul class="text-style word-break">
-              <li>ACL Anthology: <n-a target="_blank" href="https://aclanthology.org">https://aclanthology.org</n-a>
+              <li>ACL Anthology:
+                <n-a target="_blank" href="https://aclanthology.org">https://aclanthology.org</n-a>
               </li>
-              <li>ACL Pub Check: <n-a target="_blank"
-                  href="https://huggingface.co/spaces/teelinsan/aclpubcheck">https://huggingface.co/spaces/teelinsan/aclpubcheck</n-a>
+              <li>ACL Pub Check:
+                <n-a target="_blank"
+                     href="https://huggingface.co/spaces/teelinsan/aclpubcheck">
+                  https://huggingface.co/spaces/teelinsan/aclpubcheck
+                </n-a>
               </li>
-              <li>AI Conference Deadlines: <n-a target="_blank" href="https://aideadlin.es">https://aideadlin.es</n-a>
+              <li>AI Conference Deadlines:
+                <n-a target="_blank" href="https://aideadlin.es">https://aideadlin.es</n-a>
               </li>
-              <li>ColorSpace: <n-a target="_blank" href="https://mycolor.space">https://mycolor.space</n-a></li>
-              <li>HEX to CMYK: <n-a target="_blank" href="https://g.co/kgs/J1DzL4w">https://g.co/kgs/J1DzL4w</n-a></li>
-              <li>CS Rankings: <n-a target="_blank" href="https://csrankings.org">https://csrankings.org</n-a></li>
+              <li>ColorSpace:
+                <n-a target="_blank" href="https://mycolor.space">https://mycolor.space</n-a>
+              </li>
+              <li>HEX to CMYK:
+                <n-a target="_blank" href="https://g.co/kgs/J1DzL4w">https://g.co/kgs/J1DzL4w</n-a>
+              </li>
+              <li>CS Rankings:
+                <n-a target="_blank" href="https://csrankings.org">https://csrankings.org</n-a>
+              </li>
             </ul>
-            <n-divider />
+            <n-divider/>
 
-            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 © <n-a
-                href="https://nlply.tech/">Yang Liu</n-a> Developed with <n-a href="https://vuejs.org/">VUE</n-a> | Last
-              updated: Jan. 2024</p>
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 ©
+              <n-a
+                  href="https://nlply.tech/">Yang Liu
+              </n-a>
+              Developed with
+              <n-a href="https://vuejs.org/">VUE</n-a>
+              | Last
+              updated: Jan. 2024
+            </p>
           </n-flax>
         </n-flex>
       </n-flex>
     </n-flex>
 
 
-    <n-back-top :right="100" />
+    <n-back-top :right="100"/>
   </n-flex>
 </template>
 
 <script>
 
-import { At, Google, Twitter, GithubAlt } from "@vicons/fa";
+import {At, Google, Twitter, GithubAlt} from "@vicons/fa";
 
-import { defineComponent, ref } from 'vue'
+import {defineComponent, ref} from 'vue'
 
 export default defineComponent({
   components: {
@@ -335,12 +387,12 @@ export default defineComponent({
 .title-style {
   font-size: 22px;
   /* font-family: 'Times New Roman', Times, serif; */
-  font-family: Palatino,"Palatino Linotype","Palatino LT STD","Book Antiqua",Times,"Times New Roman",serif;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif;
 }
 
 .text-style {
   font-size: 20px;
-  font-family: Palatino,"Palatino Linotype","Palatino LT STD","Book Antiqua",Times,"Times New Roman",serif;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif;
 }
 
 .text-bold-style {
@@ -372,7 +424,7 @@ export default defineComponent({
   /* font-family: 'Times New Roman', Times, serif; */
   /* font-family: Times, serif; */
   /* font-family: serif; */
-  font-family: Palatino,"Palatino Linotype","Palatino LT STD","Book Antiqua",Times,"Times New Roman",serif;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif;
 }
 
 .main-titile {
@@ -415,4 +467,10 @@ export default defineComponent({
   width: 300px;
   height: 100px;
 }
+
+.no-underline {
+  text-decoration: none;
+}
+
+
 </style>
