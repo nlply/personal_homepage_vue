@@ -39,7 +39,7 @@
           </n-flex>
           <n-flex>
             <n-p class="text-style text-align-style">
-              I am currently actively looking for PhD opportunities.
+              I am a Ph.D. student at Kyoto University, working under the supervision of Prof. Chenhui Chu.
               I focus on AI fairness, language modeling, quantum theory and any other relevant work.
               Previously, I obtained my master's and bachelor's degrees from
               <n-text type="info">Tianjin
