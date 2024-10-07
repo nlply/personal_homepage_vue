@@ -8,30 +8,34 @@
             Liu
           </span>
           <span class="text-style" style="color: darkgray;">Ph.D. candidate at Kyoto University</span>
-          <n-p style="display: flex; justify-content: center;"> <!-- horizontal centering -->
+          <n-p style="display: flex; justify-content: center;margin: 0"> <!-- horizontal centering -->
             <div style="width: fit-content;text-align: left"> <!-- left alignment of two emails  -->
-            <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
-                 target="_blank">
-              <span class="text-bold-style">Email 1</span>: yangliu<span class="text-bold-style">(AT)n</span>, <span
-                class="text-bold-style">(AT)n</span>=@nlp.ist.i.kyoto-u.ac.jp
-            </n-a>
+              <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
+                   target="_blank">
+                <span class="text-bold-style">Email 1</span>: yangliu<span class="text-bold-style">(AT)n</span>, <span
+                  class="text-bold-style">(AT)n</span>=@nlp.ist.i.kyoto-u.ac.jp
+              </n-a>
               <br>
-            <n-a class="text-style no-underline" href="mailto:yangliu.nlp@gmail.com"
-                 target="_blank">
-              <span class="text-bold-style">Email 2</span>: yangliu.nlp<span class="text-bold-style">(AT)n</span>, <span
-                class="text-bold-style">(AT)n</span>=@gmail.com
-            </n-a>
-              </div>
+              <n-a class="text-style no-underline" href="mailto:yangliu.nlp@gmail.com"
+                   target="_blank">
+                <span class="text-bold-style">Email 2</span>: yangliu.nlp<span class="text-bold-style">(AT)n</span>,
+                <span
+                    class="text-bold-style">(AT)n</span>=@gmail.com
+              </n-a>
+            </div>
           </n-p>
           <n-flex justify="center">
+            <n-icon size="40" style="cursor: pointer" @click="googlscholar">
+              <v-icon name="ai-google-scholar-square" fill="#4285F4" scale="0.8"/>
+            </n-icon>
             <n-icon size="40" style="cursor: pointer" @click="pdf">
-              <At/>
+              <v-icon name="ai-cv-square" fill="#356DB7" scale="0.8"/>
             </n-icon>
             <n-icon size="40" style="cursor: pointer" @click="github">
-              <GithubAlt/>
+              <v-icon name="fa-github-square" fill="#6f42c1" scale="0.8"/>
             </n-icon>
             <n-icon size="40" style="cursor: pointer" @click="twitter">
-              <Twitter/>
+              <v-icon name="fa-twitter-square" fill="#1DA1F2" scale="0.8"/>
             </n-icon>
             <!-- <n-icon size="40" style="cursor: pointer" @click="google">
             <Google />
@@ -42,12 +46,7 @@
               I am a Ph.D. student at Kyoto University, working under the supervision of Prof. Chenhui Chu.
               I focus on AI fairness, language modeling, quantum theory and any other relevant work.
               Previously, I obtained my master's and bachelor's degrees from
-              <n-text type="info">Tianjin
-                University
-              </n-text>
-              and
-              <n-text type="info">Tianjin Normal University</n-text>
-              , respectively.
+              Tianjin University and Tianjin Normal University, respectively.
               In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time
               (during
               my master's degree) development experience.
@@ -246,17 +245,10 @@
 
 <script>
 
-import {At, Google, Twitter, GithubAlt} from "@vicons/fa";
-
 import {defineComponent, ref} from 'vue'
 
 export default defineComponent({
-  components: {
-    At,
-    Google,
-    Twitter,
-    GithubAlt
-  },
+  components: {},
   computed: {
     computedWidth() {
       return window.innerWidth / 2;
@@ -359,10 +351,9 @@ export default defineComponent({
     const pdf_url = '../../resume.pdf'
     return {
       papers,
-      At,
-      Google,
-      Twitter,
-      GithubAlt,
+      googlscholar() {
+        window.open(`https://scholar.google.com/citations?hl=en&user=8svPv7QAAAAJ&view_op=list_works&gmla=ALUCkoUyN0DPZ0Av4nLTqGPmW-tc8_h0aBvMoVJFI4fBECvN7TVTHYQzzyXBl8mki90dUXvlCHAhgBvAwij_FCRS`);
+      },
       pdf() {
         window.open(`/pdf/web/viewer.html?file=${encodeURIComponent(pdf_url)}`);
       },
