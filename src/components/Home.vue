@@ -37,6 +37,9 @@
             <n-icon size="40" style="cursor: pointer" @click="twitter">
               <v-icon name="fa-twitter-square" fill="#1DA1F2" scale="0.8"/>
             </n-icon>
+            <n-icon size="40" style="cursor: pointer" @click="linkedin">
+              <v-icon name="bi-linkedin" fill="#0077B5" scale="0.8"/>
+            </n-icon>
             <!-- <n-icon size="40" style="cursor: pointer" @click="google">
             <Google />
           </n-icon> -->
@@ -79,13 +82,8 @@
                 Recently, LLMs have developed significantly rapidly, and I also researched the fairness of LLMs for AI.
               </li>
             </ul>
-
-
             <n-divider/>
-
-
             <p class="main-titile">✍Publications</p>
-
 
             <ul class="text-style">
 
@@ -121,21 +119,15 @@
               </li>
 
             </ul>
-
-
             <n-divider/>
-
-
             <p class="main-titile">💼Experiences</p>
             <ul class="text-style">
               <li>
 
-                <n-text>Mar. 2023 - Now:</n-text>
+                <n-text>Mar. 2023 - Sept. 2024:</n-text>
                 <n-text underline>Independent Researcher</n-text>
                 <n-text italic> -
-                  Research social biases in language modeling and
-                  look
-                  for opportunities for a PhD position.
+                  Research on social biases in language models.
                 </n-text>
 
               </li>
@@ -351,9 +343,6 @@ export default defineComponent({
     const pdf_url = '../../resume.pdf'
     return {
       papers,
-      googlscholar() {
-        window.open(`https://scholar.google.com/citations?hl=en&user=8svPv7QAAAAJ&view_op=list_works&gmla=ALUCkoUyN0DPZ0Av4nLTqGPmW-tc8_h0aBvMoVJFI4fBECvN7TVTHYQzzyXBl8mki90dUXvlCHAhgBvAwij_FCRS`);
-      },
       pdf() {
         window.open(`/pdf/web/viewer.html?file=${encodeURIComponent(pdf_url)}`);
       },
@@ -363,8 +352,11 @@ export default defineComponent({
       twitter() {
         window.open(`https://twitter.com/LauyonTech`);
       },
-      google() {
-
+      googlscholar() {
+        window.open(`https://scholar.google.com/citations?hl=en&user=8svPv7QAAAAJ&view_op=list_works&gmla=ALUCkoUyN0DPZ0Av4nLTqGPmW-tc8_h0aBvMoVJFI4fBECvN7TVTHYQzzyXBl8mki90dUXvlCHAhgBvAwij_FCRS`);
+      },
+      linkedin() {
+        window.open(`https://www.linkedin.com/in/yang-liu-491846322/`);
       },
     }
   }
