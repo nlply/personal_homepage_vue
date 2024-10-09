@@ -213,6 +213,9 @@
               <li>CS Rankings:
                 <n-a target="_blank" href="https://csrankings.org">https://csrankings.org</n-a>
               </li>
+              <li>Case Converter:
+                <n-a target="_blank" href="https://capitalizemytitle.com/">https://capitalizemytitle.com</n-a>
+              </li>
             </ul>
             <n-divider/>
 
