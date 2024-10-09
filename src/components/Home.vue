@@ -216,6 +216,9 @@
               <li>Case Converter:
                 <n-a target="_blank" href="https://capitalizemytitle.com/">https://capitalizemytitle.com</n-a>
               </li>
+              <li>ACL ARR:
+                <n-a target="_blank" href="https://openreview.net/group?id=aclweb.org/ACL/ARR">https://openreview.net/group?id=aclweb.org/ACL/ARR</n-a>
+              </li>
             </ul>
             <n-divider/>
 
