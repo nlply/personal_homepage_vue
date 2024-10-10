@@ -356,7 +356,7 @@ export default defineComponent({
         window.open(`https://github.com/nlply`);
       },
       twitter() {
-        window.open(`https://twitter.com/LauyonTech`);
+        window.open(`https://twitter.com/yangliu_nlp`);
       },
       googlscholar() {
         window.open(`https://scholar.google.com/citations?hl=en&user=8svPv7QAAAAJ&view_op=list_works&gmla=ALUCkoUyN0DPZ0Av4nLTqGPmW-tc8_h0aBvMoVJFI4fBECvN7TVTHYQzzyXBl8mki90dUXvlCHAhgBvAwij_FCRS`);
