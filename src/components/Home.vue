@@ -229,7 +229,7 @@
               Developed with
               <n-a href="https://vuejs.org/">VUE</n-a>
               | Last
-              updated: Jan. 2024
+              updated: Oct. 2024
             </p>
           </n-flax>
         </n-flex>
