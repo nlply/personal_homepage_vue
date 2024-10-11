@@ -4,8 +4,7 @@
       <n-flex :style="{ width: computedWidth + 'px', 'text-align': 'center', 'max-width': '100%' }">
         <n-flex vertical>
           <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
-          <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang
-            Liu
+          <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang Liu / 劉 陽
           </span>
           <span class="text-style" style="color: darkgray;">Ph.D. candidate at Kyoto University</span>
           <n-p style="display: flex; justify-content: center;margin: 0"> <!-- horizontal centering -->
@@ -217,7 +216,9 @@
                 <n-a target="_blank" href="https://capitalizemytitle.com/">https://capitalizemytitle.com</n-a>
               </li>
               <li>ACL ARR:
-                <n-a target="_blank" href="https://openreview.net/group?id=aclweb.org/ACL/ARR">https://openreview.net/group?id=aclweb.org/ACL/ARR</n-a>
+                <n-a target="_blank" href="https://openreview.net/group?id=aclweb.org/ACL/ARR">
+                  https://openreview.net/group?id=aclweb.org/ACL/ARR
+                </n-a>
               </li>
             </ul>
             <n-divider/>
