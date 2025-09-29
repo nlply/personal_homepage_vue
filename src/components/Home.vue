@@ -4,20 +4,20 @@
       <n-flex :style="{ width: computedWidth + 'px', 'text-align': 'center', 'max-width': '100%' }">
         <n-flex vertical>
           <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
-          <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang Liu / 劉 陽
+          <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang LIU
           </span>
-          <span class="text-style" style="color: darkgray;">Ph.D. candidate at Kyoto University</span>
+          <span class="text-style" style="color: darkgray;">Ph.D. student at Kyoto University</span>
           <n-p style="display: flex; justify-content: center;margin: 0"> <!-- horizontal centering -->
             <div style="width: fit-content;text-align: left"> <!-- left alignment of two emails  -->
               <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
                    target="_blank">
-                <span class="text-bold-style">Email 1</span>: yangliu<span class="text-bold-style">(AT)n</span>, <span
+                <span class="text-bold-style">✉️</span> yangliu<span class="text-bold-style">(AT)n</span>, <span
                   class="text-bold-style">(AT)n</span>=@nlp.ist.i.kyoto-u.ac.jp
               </n-a>
               <br>
               <n-a class="text-style no-underline" href="mailto:yangliu.nlp@gmail.com"
                    target="_blank">
-                <span class="text-bold-style">Email 2</span>: yangliu.nlp<span class="text-bold-style">(AT)n</span>,
+                <span class="text-bold-style">✉️</span> yangliu.nlp<span class="text-bold-style">(AT)n</span>,
                 <span
                     class="text-bold-style">(AT)n</span>=@gmail.com
               </n-a>
@@ -62,7 +62,7 @@
           <n-flax class="text-align-style">
             <n-divider/>
 
-            <p class="main-titile">🧑‍🔬Research</p>
+            <p class="main-title">🧑‍🔬Research</p>
             <span class="text-style">
               I have a broad interest in Natural Language Processing (NLP). I am particularly interested in the following
               directions:
@@ -82,16 +82,25 @@
               </li>
             </ul>
             <n-divider/>
-            <p class="main-titile">✍Publications</p>
+            <p class="main-title">🏆Award</p>
+            <ul class="text-style">
+              <li>
+                Kyoto University DoGS NEXT AI Program (Title: DoGS Fellow)
+              </li>
+            </ul>
+
+            <n-divider/>
+
+            <p class="main-title">✍Publications</p>
 
             <ul class="text-style">
 
               <li v-for="paper in papers">
-                <div>
-                  <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
+                <div class="paper-container">
+                  <n-a class="hover-style title-style text-bold-style" type="success" v-if="paper.title" :href="paper.titleURL"
                        target="_blank">{{ paper.title }}
                   </n-a>
-                  <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
+                  <n-text class="hover-style title-style text-bold-style" type="success" v-else>NaN</n-text>
 
                   <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
                       ' ' + '(' + paper.titleExplain +
@@ -101,7 +110,9 @@
                     <div v-for="(auther, index) in paper.authers">
                       <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
                       <span v-if="index !== paper.authers.length - 1">
-                        <span v-if="index === paper.authers.length - 2">&nbsp;and&nbsp;</span>
+                        <span v-if="index === paper.authers.length - 2">
+                          <span v-if="paper.authers.length > 2">,</span>&nbsp;and&nbsp;
+                          </span>
                         <span v-else>,&nbsp;</span>
                       </span>
                     </div>
@@ -119,7 +130,7 @@
 
             </ul>
             <n-divider/>
-            <p class="main-titile">💼Experiences</p>
+            <p class="main-title">💼Experiences</p>
             <ul class="text-style">
               <li>
 
@@ -157,7 +168,7 @@
 
             <n-divider/>
 
-            <p class="main-titile">🎨Technical Skills</p>
+            <p class="main-title">🎨Technical Skills</p>
             <ul class="text-style">
               <li>Programming: Python, PyTorch, Java, Javascript, CSS</li>
               <li>
@@ -168,7 +179,7 @@
             </ul>
             <n-divider/>
 
-            <p class="main-titile">🔗Links</p>
+            <p class="main-title">🔗Links</p>
             <ul class="text-style">
               <li>Personal Blog:
                 <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a>
@@ -177,19 +188,20 @@
                 <n-a href="https://github.com/nlply">https://github.com/nlply</n-a>
               </li>
               <li>Huggingface:
-                <n-a href="https://huggingface.co/lauyon">https://huggingface.co/lauyon</n-a>
+                <n-a href="https://huggingface.co/nlply">https://huggingface.co/nlply</n-a>
               </li>
             </ul>
 
             <n-divider/>
 
-            <p class="main-titile">📝Reviewer</p>
+            <p class="main-title">📝Reviewer</p>
             <ul class="text-style">
-              <li>2023: EMNLP, ACL</li>
+              <li>ARR</li>
+              <li>AAAI</li>
             </ul>
             <n-divider/>
 
-            <p class="main-titile">📚Useful Resources</p>
+            <p class="main-title">📚Useful Resources</p>
             <ul class="text-style word-break">
               <li>ACL Anthology:
                 <n-a target="_blank" href="https://aclanthology.org">https://aclanthology.org</n-a>
@@ -202,6 +214,9 @@
               </li>
               <li>AI Conference Deadlines:
                 <n-a target="_blank" href="https://aideadlin.es">https://aideadlin.es</n-a>
+              </li>
+              <li>CCF Deadlines:
+                <n-a target="_blank" href="https://ccfddl.com">https://ccfddl.com</n-a>
               </li>
               <li>ColorSpace:
                 <n-a target="_blank" href="https://mycolor.space">https://mycolor.space</n-a>
@@ -223,14 +238,13 @@
             </ul>
             <n-divider/>
 
-            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2024 ©
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2025 ©
+              Developed by
               <n-a
                   href="https://nlply.tech/">Yang Liu
               </n-a>
-              Developed with
-              <n-a href="https://vuejs.org/">VUE</n-a>
               | Last
-              updated: Oct. 2024
+              updated: Sep. 2025
             </p>
           </n-flax>
         </n-flex>
@@ -255,6 +269,94 @@ export default defineComponent({
   },
   setup() {
     const papers = ref([
+        {
+        title: 'Understanding the Prompt Sensitivity',
+        titleExplain: '',
+        titleURL: '',
+        authers: ['Yang Liu', 'Chenhui Chu'],
+        boldAuther: 'Yang Liu',
+        conference: 'arXiv',
+        resources: [
+          // {
+          //   name: '[code]',
+          //   url: ''
+          // },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
+        {
+        title: 'Do LLMs Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with LLMs',
+        titleExplain: '',
+        titleURL: 'https://arxiv.org/abs/2509.13869',
+        authers: ['Yang Liu', 'Chenhui Chu'],
+        boldAuther: 'Yang Liu',
+        conference: 'Findings: EMNLP, 2025',
+        resources: [
+          {
+            name: '[code]',
+            url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB'
+          },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
+        {
+        title: 'On the Alignment of Large Language Models with Global Human Opinion',
+        titleExplain: '',
+        titleURL: 'https://arxiv.org/abs/2509.01418',
+        authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
+        boldAuther: 'Yang Liu',
+        conference: 'arXiv',
+        resources: [
+          {
+            name: '[code]',
+            url: 'https://github.com/nlply/global-opinion-alignment'
+          },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
+        {
+        title: 'Generating Explanations of Stereotypical Biases with Large Language Model\n',
+        titleExplain: '',
+        titleURL: 'https://www.anlp.jp/proceedings/annual_meeting/2025/pdf_dir/Q5-3.pdf',
+        authers: ['Yang Liu', 'Chenhui Chu'],
+        boldAuther: 'Yang Liu',
+        conference: '言語処理学会第31回年次大会 (NLP2025)',
+        resources: [
+          // {
+          //   name: '[code]',
+          //   url: 'https://github.com/nlply/global-opinion-alignment'
+          // },
+          // {
+          //   name: 'slide',
+          //   url: ''
+          // },
+          // {
+          //   name: 'poster',
+          //   url: ''
+          // }
+        ]
+      },
       {
         title: 'Quantifying Stereotypes in Language',
         titleExplain: 'single-authored work',
@@ -264,7 +366,7 @@ export default defineComponent({
         conference: 'The 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL), 2024',
         resources: [
           {
-            name: 'code',
+            name: '[code]',
             url: 'https://github.com/nlply/quantifying-stereotypes-in-language'
           },
           // {
@@ -286,7 +388,7 @@ export default defineComponent({
         conference: 'Proceedings of the 36th AAAI Conference on Artificial Intelligence (AAAI), 2024',
         resources: [
           {
-            name: 'code',
+            name: '[code]',
             url: 'https://github.com/nlply/robust-bias-evaluation-measures'
           },
           // {
@@ -330,7 +432,7 @@ export default defineComponent({
         conference: 'The 17th Conference of the European Chapter of the Association for Computational Linguistics (Findings: EACL), 2023',
         resources: [
           {
-            name: 'code',
+            name: '[code]',
             url: 'https://github.com/nlply/EACL2023-QE-Features'
           },
           // {
@@ -376,13 +478,14 @@ export default defineComponent({
 
 .title-style {
   font-size: 22px;
-  /* font-family: 'Times New Roman', Times, serif; */
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif;
+  font-family: 'Times New Roman', Times, serif;
+  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif; */
 }
 
 .text-style {
   font-size: 20px;
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif;
+  font-family: 'Times New Roman', Times, serif;
+  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif; */
 }
 
 .text-bold-style {
@@ -411,13 +514,13 @@ export default defineComponent({
 }
 
 .custom-font {
-  /* font-family: 'Times New Roman', Times, serif; */
+  font-family: 'Times New Roman', Times, serif;
   /* font-family: Times, serif; */
   /* font-family: serif; */
-  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif;
+  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif; */
 }
 
-.main-titile {
+.main-title {
   font-size: 28px;
   font-family: Arial;
   font-weight: bold;
@@ -462,5 +565,8 @@ export default defineComponent({
   text-decoration: none;
 }
 
+.paper-container {
+  margin-bottom: 10px;
+}
 
 </style>

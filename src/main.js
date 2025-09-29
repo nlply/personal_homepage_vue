@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import naive from 'naive-ui'
+// import '@/assets/styles/global.css'
 
 // add oh-vue-icons https://oh-vue-icons.js.org/
 import { OhVueIcon, addIcons } from "oh-vue-icons";
