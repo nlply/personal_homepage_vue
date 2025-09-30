@@ -4,12 +4,12 @@
       <n-flex :style="{ width: computedWidth + 'px', 'text-align': 'center', 'max-width': '100%' }">
         <n-flex vertical>
           <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
-          <span style="font-size: 40px;font-weight: bold;color: #000;" class="custom-font">Yang LIU
+          <span style="font-size: 40px;font-weight: bold;" class="custom-font">Yang LIU
           </span>
           <span class="text-style" style="color: darkgray;">Ph.D. student at Kyoto University</span>
           <n-p style="display: flex; justify-content: center;margin: 0"> <!-- horizontal centering -->
             <div style="width: fit-content;text-align: left"> <!-- left alignment of two emails  -->
-              <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
+              <!-- <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
                    target="_blank">
                 <span class="text-bold-style">✉️</span> yangliu<span class="text-bold-style">(AT)n</span>, <span
                   class="text-bold-style">(AT)n</span>=@nlp.ist.i.kyoto-u.ac.jp
@@ -20,6 +20,16 @@
                 <span class="text-bold-style">✉️</span> yangliu.nlp<span class="text-bold-style">(AT)n</span>,
                 <span
                     class="text-bold-style">(AT)n</span>=@gmail.com
+              </n-a> -->
+              <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
+                   target="_blank">
+                <span class="text-bold-style">✉️</span> yangliu[at]nlp.ist.i.kyoto-u.ac.jp
+              </n-a>
+              <!-- <br> -->
+              <n-text type="info">&</n-text> 
+              <n-a class="text-style no-underline" href="mailto:yangliu.nlp@gmail.com"
+                   target="_blank">
+                   yangliu.nlp[at]gmail.com
               </n-a>
             </div>
           </n-p>
@@ -230,7 +240,7 @@
               <li>Case Converter:
                 <n-a target="_blank" href="https://capitalizemytitle.com/">https://capitalizemytitle.com</n-a>
               </li>
-              <li>ACL ARR:
+              <li>ACL Rolling Review:
                 <n-a target="_blank" href="https://openreview.net/group?id=aclweb.org/ACL/ARR">
                   https://openreview.net/group?id=aclweb.org/ACL/ARR
                 </n-a>
@@ -264,7 +274,7 @@ export default defineComponent({
   components: {},
   computed: {
     computedWidth() {
-      return window.innerWidth / 2;
+      return window.innerWidth / 1.5;
     },
   },
   setup() {
