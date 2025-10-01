@@ -107,15 +107,15 @@
 
               <li v-for="paper in papers">
                 <div class="paper-container">
-                  <n-a class="hover-style title-style text-bold-style" type="success" v-if="paper.title" :href="paper.titleURL"
+                  <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
                        target="_blank">{{ paper.title }}
                   </n-a>
-                  <n-text class="hover-style title-style text-bold-style" type="success" v-else>NaN</n-text>
+                  <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
 
-                  <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
+                  <!-- <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
                       ' ' + '(' + paper.titleExplain +
                       ')'
-                    }}</span>
+                    }}</span> -->
                   <n-flex style="gap:0 0!important">
                     <div v-for="(auther, index) in paper.authers">
                       <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
@@ -127,12 +127,22 @@
                       </span>
                     </div>
                   </n-flex>
-                  <n-text italic>{{ paper.conference }}</n-text>
-                  <br>
+                  <n-text class="text-bold-style">{{ paper.conference }}.</n-text>
+                  <!-- <br> -->
+                  <!-- <span v-if="paper.resources.length != 0" class="text-bold-style">
+                    .&nbsp;
+                  </span> -->
                   <span v-for="(resource, index) in paper.resources">
-                    <n-a :href="resource.url" class="hover-style" style="text-decoration: none" target="_blank">{{
+                    
+                    <n-a :href="resource.url" class="hover-style" style="text-decoration: none" target="_blank">
+                      &nbsp;{{
                         resource.name
                       }}</n-a>
+                      <!-- &nbsp;
+                      <n-button strong secondary type="info" class="text-style" size="small" tag="a" :href="resource.url" target="_blank">
+                      {{
+                        resource.name
+                      }}</n-button> -->
                     <n-divider v-if="index !== paper.resources.length - 1" vertical/>
                   </span>
                 </div>
@@ -254,7 +264,7 @@
                   href="https://nlply.tech/">Yang Liu
               </n-a>
               | Last
-              updated: Sep. 2025
+              updated: Oct. 2025
             </p>
           </n-flax>
         </n-flex>
@@ -285,7 +295,7 @@ export default defineComponent({
         titleURL: '',
         authers: ['Yang Liu', 'Chenhui Chu'],
         boldAuther: 'Yang Liu',
-        conference: 'arXiv',
+        conference: 'arXiv preprint, 2025',
         resources: [
           // {
           //   name: '[code]',
@@ -310,8 +320,9 @@ export default defineComponent({
         conference: 'Findings: EMNLP, 2025',
         resources: [
           {
-            name: '[code]',
-            url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB'
+            name: 'Code',
+            url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB',
+            buttonType: 'info'
           },
           // {
           //   name: 'slide',
@@ -329,10 +340,10 @@ export default defineComponent({
         titleURL: 'https://arxiv.org/abs/2509.01418',
         authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
         boldAuther: 'Yang Liu',
-        conference: 'arXiv',
+        conference: 'arXiv preprint, 2025',
         resources: [
           {
-            name: '[code]',
+            name: 'Code',
             url: 'https://github.com/nlply/global-opinion-alignment'
           },
           // {
@@ -373,10 +384,10 @@ export default defineComponent({
         titleURL: 'https://arxiv.org/abs/2401.15535',
         authers: ['Yang Liu'],
         boldAuther: 'Yang Liu',
-        conference: 'The 18th Conference of the European Chapter of the Association for Computational Linguistics (EACL), 2024',
+        conference: 'EACL, 2024',
         resources: [
           {
-            name: '[code]',
+            name: 'Code',
             url: 'https://github.com/nlply/quantifying-stereotypes-in-language'
           },
           // {
@@ -395,10 +406,10 @@ export default defineComponent({
         titleURL: 'https://arxiv.org/abs/2401.11601',
         authers: ['Yang Liu'],
         boldAuther: 'Yang Liu',
-        conference: 'Proceedings of the 36th AAAI Conference on Artificial Intelligence (AAAI), 2024',
+        conference: 'AAAI, 2024',
         resources: [
           {
-            name: '[code]',
+            name: 'Code',
             url: 'https://github.com/nlply/robust-bias-evaluation-measures'
           },
           // {
@@ -417,7 +428,7 @@ export default defineComponent({
         titleURL: 'https://arxiv.org/pdf/2307.08586.pdf',
         authers: ['Yang Liu', 'Yuexian Hou'],
         boldAuther: 'Yang Liu',
-        conference: 'International Conference on Artificial Neural Networks (ICANN), 2023',
+        conference: 'ICANN, 2023',
         resources: [
           // {
           //   name: 'code',
@@ -439,10 +450,10 @@ export default defineComponent({
         titleURL: 'https://aclanthology.org/2023.findings-eacl.152/',
         authers: ['Yang Liu', 'Yuexian Hou'],
         boldAuther: 'Yang Liu',
-        conference: 'The 17th Conference of the European Chapter of the Association for Computational Linguistics (Findings: EACL), 2023',
+        conference: 'Findings: EACL, 2023',
         resources: [
           {
-            name: '[code]',
+            name: 'Code',
             url: 'https://github.com/nlply/EACL2023-QE-Features'
           },
           // {
