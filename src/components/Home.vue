@@ -105,9 +105,9 @@
 
             <ul class="text-style">
               <div v-for="publication in this.publications" :key="publication.year">
-                <n-h1 prefix="bar">
-                    {{ publication.year }}
-                </n-h1>
+                  <n-divider title-placement="left">
+                    <span class="text-bold-style" style="font-size: 24px">{{ publication.year }}</span>
+                  </n-divider>
                 <li v-for="paper in publication.papers">
                   <div class="paper-container">
                     <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
@@ -557,6 +557,7 @@ export default defineComponent({
   font-size: 28px;
   font-family: Arial;
   font-weight: bold;
+  text-align: center;
 }
 
 .hover-style:hover {
