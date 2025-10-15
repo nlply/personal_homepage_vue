@@ -58,7 +58,7 @@
               I am a Ph.D. student at Kyoto University, working under the supervision of Prof. Chenhui Chu.
               I focus on AI fairness, language modeling, quantum theory and any other relevant work.
               Previously, I obtained my master's and bachelor's degrees from
-              Tianjin University and Tianjin Normal University, respectively.
+              Tianjin University (Peiyang University) and Tianjin Normal University, respectively.
               In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time
               (during
               my master's degree) development experience.
@@ -104,50 +104,53 @@
             <p class="main-title">✍Publications</p>
 
             <ul class="text-style">
+              <div v-for="publication in this.publications" :key="publication.year">
+                <n-h1 prefix="bar">
+                    {{ publication.year }}
+                </n-h1>
+                <li v-for="paper in publication.papers">
+                  <div class="paper-container">
+                    <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
+                        target="_blank">{{ paper.title }}
+                    </n-a>
+                    <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
 
-              <li v-for="paper in papers">
-                <div class="paper-container">
-                  <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
-                       target="_blank">{{ paper.title }}
-                  </n-a>
-                  <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
-
-                  <!-- <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
-                      ' ' + '(' + paper.titleExplain +
-                      ')'
-                    }}</span> -->
-                  <n-flex style="gap:0 0!important">
-                    <div v-for="(auther, index) in paper.authers">
-                      <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
-                      <span v-if="index !== paper.authers.length - 1">
-                        <span v-if="index === paper.authers.length - 2">
-                          <span v-if="paper.authers.length > 2">,</span>&nbsp;and&nbsp;
-                          </span>
-                        <span v-else>,&nbsp;</span>
-                      </span>
-                    </div>
-                  </n-flex>
-                  <n-text class="text-bold-style">{{ paper.conference }}.</n-text>
-                  <!-- <br> -->
-                  <!-- <span v-if="paper.resources.length != 0" class="text-bold-style">
-                    .&nbsp;
-                  </span> -->
-                  <span v-for="(resource, index) in paper.resources">
-                    
-                    <n-a :href="resource.url" class="hover-style" style="text-decoration: none" target="_blank">
-                      &nbsp;{{
-                        resource.name
-                      }}</n-a>
-                      <!-- &nbsp;
-                      <n-button strong secondary type="info" class="text-style" size="small" tag="a" :href="resource.url" target="_blank">
-                      {{
-                        resource.name
-                      }}</n-button> -->
-                    <n-divider v-if="index !== paper.resources.length - 1" vertical/>
-                  </span>
-                </div>
-              </li>
-
+                    <!-- <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
+                        ' ' + '(' + paper.titleExplain +
+                        ')'
+                      }}</span> -->
+                    <n-flex style="gap:0 0!important">
+                      <div v-for="(auther, index) in paper.authers">
+                        <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
+                        <span v-if="index !== paper.authers.length - 1">
+                          <span v-if="index === paper.authers.length - 2">
+                            <span v-if="paper.authers.length > 2">,</span>&nbsp;and&nbsp;
+                            </span>
+                          <span v-else>,&nbsp;</span>
+                        </span>
+                      </div>
+                    </n-flex>
+                    <n-text class="text-bold-style">{{ paper.conference }}.</n-text>
+                    <!-- <br> -->
+                    <!-- <span v-if="paper.resources.length != 0" class="text-bold-style">
+                      .&nbsp;
+                    </span> -->
+                    <span v-for="(resource, index) in paper.resources">
+                      
+                      <n-a :href="resource.url" class="hover-style" style="text-decoration: none" target="_blank">
+                        &nbsp;{{
+                          resource.name
+                        }}</n-a>
+                        <!-- &nbsp;
+                        <n-button strong secondary type="info" class="text-style" size="small" tag="a" :href="resource.url" target="_blank">
+                        {{
+                          resource.name
+                        }}</n-button> -->
+                      <n-divider v-if="index !== paper.resources.length - 1" vertical/>
+                    </span>
+                  </div>
+                </li>
+              </div>
             </ul>
             <n-divider/>
             <p class="main-title">💼Experiences</p>
@@ -288,97 +291,102 @@ export default defineComponent({
     },
   },
   setup() {
-    const papers = ref([
+    const publications = ref([
         {
-        title: 'Understanding the Prompt Sensitivity',
-        titleExplain: '',
-        titleURL: '',
-        authers: ['Yang Liu', 'Chenhui Chu'],
-        boldAuther: 'Yang Liu',
-        conference: 'arXiv preprint, 2025',
-        resources: [
-          // {
-          //   name: '[code]',
-          //   url: ''
-          // },
-          // {
-          //   name: 'slide',
-          //   url: ''
-          // },
-          // {
-          //   name: 'poster',
-          //   url: ''
-          // }
-        ]
-      },
-        {
-        title: 'Do LLMs Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with LLMs',
-        titleExplain: '',
-        titleURL: 'https://arxiv.org/abs/2509.13869',
-        authers: ['Yang Liu', 'Chenhui Chu'],
-        boldAuther: 'Yang Liu',
-        conference: 'Findings: EMNLP, 2025',
-        resources: [
+          "year": 2025,
+          "papers": [{
+          title: 'Understanding the Prompt Sensitivity',
+          titleExplain: '',
+          titleURL: '',
+          authers: ['Yang Liu', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: 'arXiv preprint, 2025',
+          resources: [
+            // {
+            //   name: '[code]',
+            //   url: ''
+            // },
+            // {
+            //   name: 'slide',
+            //   url: ''
+            // },
+            // {
+            //   name: 'poster',
+            //   url: ''
+            // }
+          ]
+        },
           {
-            name: 'Code',
-            url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB',
-            buttonType: 'info'
-          },
-          // {
-          //   name: 'slide',
-          //   url: ''
-          // },
-          // {
-          //   name: 'poster',
-          //   url: ''
-          // }
-        ]
-      },
-        {
-        title: 'On the Alignment of Large Language Models with Global Human Opinion',
-        titleExplain: '',
-        titleURL: 'https://arxiv.org/abs/2509.01418',
-        authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
-        boldAuther: 'Yang Liu',
-        conference: 'arXiv preprint, 2025',
-        resources: [
+          title: 'Do LLMs Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with LLMs',
+          titleExplain: '',
+          titleURL: 'https://arxiv.org/abs/2509.13869',
+          authers: ['Yang Liu', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: 'Findings: EMNLP, 2025',
+          resources: [
+            {
+              name: 'Code',
+              url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB',
+              buttonType: 'info'
+            },
+            // {
+            //   name: 'slide',
+            //   url: ''
+            // },
+            // {
+            //   name: 'poster',
+            //   url: ''
+            // }
+          ]
+        },
           {
-            name: 'Code',
-            url: 'https://github.com/nlply/global-opinion-alignment'
-          },
-          // {
-          //   name: 'slide',
-          //   url: ''
-          // },
-          // {
-          //   name: 'poster',
-          //   url: ''
-          // }
-        ]
-      },
-        {
-        title: 'Generating Explanations of Stereotypical Biases with Large Language Model\n',
-        titleExplain: '',
-        titleURL: 'https://www.anlp.jp/proceedings/annual_meeting/2025/pdf_dir/Q5-3.pdf',
-        authers: ['Yang Liu', 'Chenhui Chu'],
-        boldAuther: 'Yang Liu',
-        conference: '言語処理学会第31回年次大会 (NLP2025)',
-        resources: [
-          // {
-          //   name: '[code]',
-          //   url: 'https://github.com/nlply/global-opinion-alignment'
-          // },
-          // {
-          //   name: 'slide',
-          //   url: ''
-          // },
-          // {
-          //   name: 'poster',
-          //   url: ''
-          // }
-        ]
+          title: 'On the Alignment of Large Language Models with Global Human Opinion',
+          titleExplain: '',
+          titleURL: 'https://arxiv.org/abs/2509.01418',
+          authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: 'arXiv preprint, 2025',
+          resources: [
+            {
+              name: 'Code',
+              url: 'https://github.com/nlply/global-opinion-alignment'
+            },
+            // {
+            //   name: 'slide',
+            //   url: ''
+            // },
+            // {
+            //   name: 'poster',
+            //   url: ''
+            // }
+          ]
+        },
+          {
+          title: 'Generating Explanations of Stereotypical Biases with Large Language Model\n',
+          titleExplain: '',
+          titleURL: 'https://www.anlp.jp/proceedings/annual_meeting/2025/pdf_dir/Q5-3.pdf',
+          authers: ['Yang Liu', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: '言語処理学会第31回年次大会 (NLP2025)',
+          resources: [
+            // {
+            //   name: '[code]',
+            //   url: 'https://github.com/nlply/global-opinion-alignment'
+            // },
+            // {
+            //   name: 'slide',
+            //   url: ''
+            // },
+            // {
+            //   name: 'poster',
+            //   url: ''
+            // }
+          ]
+        },]
       },
       {
+        "year": 2024,
+        "papers": [{
         title: 'Quantifying Stereotypes in Language',
         titleExplain: 'single-authored work',
         titleURL: 'https://arxiv.org/abs/2401.15535',
@@ -421,8 +429,11 @@ export default defineComponent({
           //   url: ''
           // }
         ]
+      },]
       },
       {
+        "year": 2023,
+        "papers": [{
         title: 'Syntax-Aware Complex-Valued Neural Machine Translation',
         titleExplain: '',
         titleURL: 'https://arxiv.org/pdf/2307.08586.pdf',
@@ -465,6 +476,7 @@ export default defineComponent({
           //   url: ''
           // }
         ]
+      }]
       }
     ])
 
@@ -472,7 +484,7 @@ export default defineComponent({
     // resume
     const pdf_url = '../../resume.pdf'
     return {
-      papers,
+      publications,
       pdf() {
         window.open(`/pdf/web/viewer.html?file=${encodeURIComponent(pdf_url)}`);
       },
