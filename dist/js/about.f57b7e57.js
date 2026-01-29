@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkblog"]=self["webpackChunkblog"]||[]).push([[443],{4333:function(e,n,r){r.r(n),r.d(n,{default:function(){return p}});var t=r(6252);function d(e,n,r,d,u,f){return(0,t.wg)(),(0,t.iD)("div",null,[(0,t._)("button",{onClick:n[0]||(n[0]=(...e)=>f.pdf&&f.pdf(...e))}," pdf ")])}var u={data(){return{pdf_url:"../../resume.pdf"}},methods:{pdf(){window.open(`/pdf/web/viewer.html?file=${encodeURIComponent(this.pdf_url)}`)}}},f=r(3744);const o=(0,f.Z)(u,[["render",d]]);var p=o}}]);
+//# sourceMappingURL=about.f57b7e57.js.map

@@ -95,6 +95,9 @@
             <p class="main-title">🏆Award</p>
             <ul class="text-style">
               <li>
+                Best Paper Award, The 40th Annual AAAI Conference on Artificial Intelligence@Singapore
+              </li>
+              <li>
                 Kyoto University DoGS NEXT AI Program (Title: DoGS Fellow)
               </li>
             </ul>
@@ -131,6 +134,7 @@
                       </div>
                     </n-flex>
                     <n-text class="text-bold-style">{{ paper.conference }}.</n-text>
+                    <n-text class="text-bold-style" type="error" v-if="paper.tag">&nbsp;{{ paper.tag }}.</n-text>
                     <!-- <br> -->
                     <!-- <span v-if="paper.resources.length != 0" class="text-bold-style">
                       .&nbsp;
@@ -293,14 +297,15 @@ export default defineComponent({
   setup() {
     const publications = ref([
         {
-          "year": 2025,
-          "papers": [{
+          'year': 2026,
+          'papers': [
+            {
           title: 'Understanding the Prompt Sensitivity',
           titleExplain: '',
           titleURL: '',
           authers: ['Yang Liu', 'Chenhui Chu'],
           boldAuther: 'Yang Liu',
-          conference: 'arXiv preprint, 2025',
+          conference: 'Under Review, 2026',
           resources: [
             // {
             //   name: '[code]',
@@ -317,17 +322,17 @@ export default defineComponent({
           ]
         },
           {
-          title: 'Do LLMs Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with LLMs',
+          title: 'On the Alignment of Large Language Models with Global Human Opinion',
           titleExplain: '',
-          titleURL: 'https://arxiv.org/abs/2509.13869',
-          authers: ['Yang Liu', 'Chenhui Chu'],
+          titleURL: 'https://arxiv.org/abs/2509.01418',
+          authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
           boldAuther: 'Yang Liu',
-          conference: 'Findings: EMNLP, 2025',
+          conference: 'AAAI, 2026',
+          tag: 'Best Paper Award',
           resources: [
             {
               name: 'Code',
-              url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB',
-              buttonType: 'info'
+              url: 'https://github.com/nlply/global-opinion-alignment'
             },
             // {
             //   name: 'slide',
@@ -339,17 +344,24 @@ export default defineComponent({
             // }
           ]
         },
+        
+          ]
+        },
+        {
+          "year": 2025,
+          "papers": [
           {
-          title: 'On the Alignment of Large Language Models with Global Human Opinion',
+          title: 'Do LLMs Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with LLMs',
           titleExplain: '',
-          titleURL: 'https://arxiv.org/abs/2509.01418',
-          authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
+          titleURL: 'https://arxiv.org/abs/2509.13869',
+          authers: ['Yang Liu', 'Chenhui Chu'],
           boldAuther: 'Yang Liu',
-          conference: 'arXiv preprint, 2025',
+          conference: 'Findings: EMNLP, 2025',
           resources: [
             {
               name: 'Code',
-              url: 'https://github.com/nlply/global-opinion-alignment'
+              url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB',
+              buttonType: 'info'
             },
             // {
             //   name: 'slide',
