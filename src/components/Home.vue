@@ -618,7 +618,7 @@ export default defineComponent({
   justify-content: center;
   gap: 14px;
   margin: 56px 0 20px;
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -628,9 +628,9 @@ export default defineComponent({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.8em;
-  height: 1.8em;
-  font-size: 0.7em;
+  width: 1.9em;
+  height: 1.9em;
+  font-size: 0.75em;
   border-radius: 999px;
   background: rgba(120, 120, 120, 0.14);
 }
@@ -745,7 +745,7 @@ export default defineComponent({
   }
 
   .main-title {
-    font-size: 24px;
+    font-size: 28px;
     gap: 10px;
     margin: 40px 0 16px;
   }
