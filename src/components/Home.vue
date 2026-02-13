@@ -1,14 +1,14 @@
 <template>
-  <n-flex justify="center" style="width:100%;padding-bottom: 50px;">
-    <n-flex justify="center">
-      <n-flex :style="{ width: computedWidth + 'px', 'text-align': 'center', 'max-width': '100%' }">
+  <n-flex justify="center" class="home-page">
+    <div class="home-content">
+      <div class="profile-column">
         <n-flex vertical>
           <div><img class="avatar" alt="avatar" src="../assets/avatar.png"></div>
           <span style="font-size: 40px;font-weight: bold;" class="custom-font">Yang LIU
           </span>
           <span class="text-style" style="color: darkgray;">Ph.D. student at Kyoto University</span>
-          <n-p style="display: flex; justify-content: center;margin: 0"> <!-- horizontal centering -->
-            <div style="width: fit-content;text-align: left"> <!-- left alignment of two emails  -->
+          <n-p class="contact-line"> <!-- horizontal centering -->
+            <div class="contact-wrap"> <!-- left alignment of two emails  -->
               <!-- <n-a class="text-style no-underline" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp"
                    target="_blank">
                 <span class="text-bold-style">✉️</span> yangliu<span class="text-bold-style">(AT)n</span>, <span
@@ -33,7 +33,7 @@
               </n-a>
             </div>
           </n-p>
-          <n-flex justify="center">
+          <n-flex justify="center" class="social-row">
             <n-icon size="40" style="cursor: pointer" @click="googlscholar">
               <v-icon name="ai-google-scholar-square" fill="#4285F4" scale="0.8"/>
             </n-icon>
@@ -55,10 +55,10 @@
           </n-flex>
           <n-flex>
             <n-p class="text-style text-align-style">
-              I am a Ph.D. student at Kyoto University, working under the supervision of Prof. Chenhui Chu.
+              I am a Ph.D. student at 🇯🇵 Kyoto University, working under the supervision of Prof. Chenhui Chu.
               I focus on AI fairness, language modeling, quantum theory and any other relevant work.
               Previously, I obtained my master's and bachelor's degrees from
-              Tianjin University (Peiyang University) and Tianjin Normal University, respectively.
+              🇨🇳 Tianjin University (Peiyang University) and 🇨🇳 Tianjin Normal University, respectively.
               In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time
               (during
               my master's degree) development experience.
@@ -68,11 +68,11 @@
             </n-p>
           </n-flex>
         </n-flex>
-        <n-flex>
-          <n-flax class="text-align-style">
-            <n-divider/>
+      </div>
+      <div class="main-column">
+        <n-flax class="text-align-style">
 
-            <p class="main-title">🧑‍🔬Research</p>
+            <p class="main-title"><span class="main-title-icon">🧑‍🔬</span><span class="main-title-text">Research</span></p>
             <span class="text-style">
               I have a broad interest in Natural Language Processing (NLP). I am particularly interested in the following
               directions:
@@ -91,38 +91,42 @@
                 Recently, LLMs have developed significantly rapidly, and I also researched the fairness of LLMs for AI.
               </li>
             </ul>
-            <n-divider/>
-            <p class="main-title">🏆Award</p>
+            <p class="main-title"><span class="main-title-icon">🏆</span><span class="main-title-text">Award</span></p>
             <ul class="text-style">
               <li>
-                Best Paper Award, The 40th Annual AAAI Conference on Artificial Intelligence@Singapore
+                <n-a href="https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/" target="_blank">
+                  Best Paper Award
+                </n-a>, The 40th Annual AAAI Conference on Artificial Intelligence@Singapore
               </li>
               <li>
-                Kyoto University DoGS NEXT AI Program (Title: DoGS Fellow)
+                Kyoto University
+                <n-a href="https://www.kugd.k.kyoto-u.ac.jp/en/support/recruitlist/" target="_blank">
+                  DoGS NEXT AI Program
+                </n-a>
+                (Title: DoGS Fellow)
               </li>
             </ul>
 
-            <n-divider/>
 
-            <p class="main-title">✍Publications</p>
+            <p class="main-title"><span class="main-title-icon">✍</span><span class="main-title-text">Publications</span></p>
 
             <ul class="text-style">
               <div v-for="publication in this.publications" :key="publication.year">
-                  <n-divider title-placement="left">
-                    <span class="text-bold-style" style="font-size: 24px">{{ publication.year }}</span>
-                  </n-divider>
+                  <div class="publication-year">
+                    <span class="text-bold-style publication-year-text">{{ publication.year }}</span>
+                  </div>
                 <li v-for="paper in publication.papers">
                   <div class="paper-container">
-                    <n-a class="hover-style title-style" type="success" v-if="paper.title" :href="paper.titleURL"
+                    <n-a class="hover-style title-style paper-title" type="success" v-if="paper.title" :href="paper.titleURL"
                         target="_blank">{{ paper.title }}
                     </n-a>
-                    <n-text class="hover-style title-style" type="success" v-else>NaN</n-text>
+                    <n-text class="hover-style title-style paper-title" type="success" v-else>NaN</n-text>
 
                     <!-- <span v-if="paper.titleExplain" class="text-bold-style title-style">{{
                         ' ' + '(' + paper.titleExplain +
                         ')'
                       }}</span> -->
-                    <n-flex style="gap:0 0!important">
+                    <n-flex class="paper-authors">
                       <div v-for="(auther, index) in paper.authers">
                         <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
                         <span v-if="index !== paper.authers.length - 1">
@@ -133,8 +137,8 @@
                         </span>
                       </div>
                     </n-flex>
-                    <n-text class="text-bold-style">{{ paper.conference }}.</n-text>
-                    <n-text class="text-bold-style" type="error" v-if="paper.tag">&nbsp;{{ paper.tag }}.</n-text>
+                    <n-text class="text-bold-style paper-conference">{{ paper.conference }}.</n-text>
+                    <n-text class="text-bold-style paper-conference" type="error" v-if="paper.tag">&nbsp;{{ paper.tag }}.</n-text>
                     <!-- <br> -->
                     <!-- <span v-if="paper.resources.length != 0" class="text-bold-style">
                       .&nbsp;
@@ -153,11 +157,12 @@
                       <n-divider v-if="index !== paper.resources.length - 1" vertical/>
                     </span>
                   </div>
+                  
                 </li>
+                <n-divider></n-divider>
               </div>
             </ul>
-            <n-divider/>
-            <p class="main-title">💼Experiences</p>
+            <p class="main-title"><span class="main-title-icon">💼</span><span class="main-title-text">Experiences</span></p>
             <ul class="text-style">
               <li>
 
@@ -193,9 +198,8 @@
               </li>
             </ul>
 
-            <n-divider/>
 
-            <p class="main-title">🎨Technical Skills</p>
+            <p class="main-title"><span class="main-title-icon">🎨</span><span class="main-title-text">Technical Skills</span></p>
             <ul class="text-style">
               <li>Programming: Python, PyTorch, Java, Javascript, CSS</li>
               <li>
@@ -204,9 +208,8 @@
                 Development
               </li>
             </ul>
-            <n-divider/>
 
-            <p class="main-title">🔗Links</p>
+            <p class="main-title"><span class="main-title-icon">🔗</span><span class="main-title-text">Links</span></p>
             <ul class="text-style">
               <li>Personal Blog:
                 <n-a href="https://www.nlply.tech">https://www.nlply.tech</n-a>
@@ -219,16 +222,14 @@
               </li>
             </ul>
 
-            <n-divider/>
 
-            <p class="main-title">📝Reviewer</p>
+            <p class="main-title"><span class="main-title-icon">📝</span><span class="main-title-text">Reviewer</span></p>
             <ul class="text-style">
               <li>ARR</li>
               <li>AAAI</li>
             </ul>
-            <n-divider/>
 
-            <p class="main-title">📚Useful Resources</p>
+            <p class="main-title"><span class="main-title-icon">📚</span><span class="main-title-text">Useful Resources</span></p>
             <ul class="text-style word-break">
               <li>ACL Anthology:
                 <n-a target="_blank" href="https://aclanthology.org">https://aclanthology.org</n-a>
@@ -263,7 +264,6 @@
                 </n-a>
               </li>
             </ul>
-            <n-divider/>
 
             <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2025 ©
               Developed by
@@ -273,11 +273,9 @@
               | Last
               updated: Oct. 2025
             </p>
-          </n-flax>
-        </n-flex>
-      </n-flex>
-    </n-flex>
-
+        </n-flax>
+      </div>
+    </div>
 
     <n-back-top :right="100"/>
   </n-flex>
@@ -289,16 +287,33 @@ import {defineComponent, ref} from 'vue'
 
 export default defineComponent({
   components: {},
-  computed: {
-    computedWidth() {
-      return window.innerWidth / 1.5;
-    },
-  },
   setup() {
     const publications = ref([
         {
           'year': 2026,
           'papers': [
+            {
+          title: '大規模言語モデルと世界各国の価値観とのアライメント',
+          titleExplain: '',
+          titleURL: '',
+          authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: '言語処理学会第32回年次大会 (ANLP2026)',
+          resources: [
+            // {
+            //   name: '[code]',
+            //   url: ''
+            // },
+            // {
+            //   name: 'slide',
+            //   url: ''
+            // },
+            // {
+            //   name: 'poster',
+            //   url: ''
+            // }
+          ]
+        },
             {
           title: 'Understanding the Prompt Sensitivity',
           titleExplain: '',
@@ -379,7 +394,7 @@ export default defineComponent({
           titleURL: 'https://www.anlp.jp/proceedings/annual_meeting/2025/pdf_dir/Q5-3.pdf',
           authers: ['Yang Liu', 'Chenhui Chu'],
           boldAuther: 'Yang Liu',
-          conference: '言語処理学会第31回年次大会 (NLP2025)',
+          conference: '言語処理学会第31回年次大会 (ANLP2025)',
           resources: [
             // {
             //   name: '[code]',
@@ -520,23 +535,58 @@ export default defineComponent({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home-page {
+  width: 100%;
+  padding: 0 16px 50px;
+  box-sizing: border-box;
+}
+
+.home-content {
+  width: min(900px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.profile-column {
+  text-align: center;
+  position: static;
+  width: 100%;
+  justify-self: stretch;
+}
+
+.main-column {
+  min-width: 0;
+}
+
+.contact-line {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.contact-wrap {
+  width: fit-content;
+  text-align: left;
+  line-height: 1.8;
+}
+
+.social-row {
+  flex-wrap: wrap;
+}
 
 .title-style {
   font-size: 22px;
-  font-family: 'Times New Roman', Times, serif;
-  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif; */
 }
 
 .text-style {
   font-size: 20px;
-  font-family: 'Times New Roman', Times, serif;
-  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif; */
 }
 
 .text-bold-style {
   /* font-size: 22px; */
   font-weight: bold;
-  /* font-family: 'Times New Roman', Times, serif; */
 }
 
 .text-align-style {
@@ -559,17 +609,47 @@ export default defineComponent({
 }
 
 .custom-font {
-  font-family: 'Times New Roman', Times, serif;
-  /* font-family: Times, serif; */
-  /* font-family: serif; */
-  /* font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Times, "Times New Roman", serif; */
 }
 
 .main-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 56px 0 20px;
   font-size: 28px;
-  font-family: Arial;
-  font-weight: bold;
+  font-weight: 700;
+  line-height: 1.2;
   text-align: center;
+}
+
+.main-title-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8em;
+  height: 1.8em;
+  font-size: 0.7em;
+  border-radius: 999px;
+  background: rgba(120, 120, 120, 0.14);
+}
+
+.main-title-text {
+  letter-spacing: 0.01em;
+}
+
+.main-title::before,
+.main-title::after {
+  content: '';
+  height: 2px;
+  flex: 1;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(120, 120, 120, 0.08), rgba(120, 120, 120, 0.45));
+}
+
+.main-title::after {
+  background: linear-gradient(90deg, rgba(120, 120, 120, 0.45), rgba(120, 120, 120, 0.08));
 }
 
 .hover-style:hover {
@@ -589,6 +669,8 @@ export default defineComponent({
   width: 250px;
   height: 250px;
   margin-top: 50px;
+  max-width: 100%;
+  object-fit: cover;
 }
 
 /* split */
@@ -613,6 +695,65 @@ export default defineComponent({
 
 .paper-container {
   margin-bottom: 10px;
+}
+
+.paper-title {
+  display: block;
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.paper-authors {
+  gap: 0 !important;
+  line-height: 1.25;
+  margin-bottom: 2px;
+  flex-wrap: wrap;
+}
+
+.paper-conference {
+  line-height: 1.25;
+}
+
+.publication-year {
+  display: flex;
+  align-items: center;
+  margin: 12px 0 8px;
+}
+
+.publication-year-text {
+  font-size: 24px;
+  color: #888888;
+}
+
+@media (max-width: 640px) {
+  .home-page {
+    padding: 0 12px 36px;
+  }
+
+  .avatar {
+    width: 180px;
+    height: 180px;
+    margin-top: 24px;
+  }
+
+  .title-style {
+    font-size: 18px;
+  }
+
+  .text-style {
+    font-size: 16px;
+  }
+
+  .main-title {
+    font-size: 24px;
+    gap: 10px;
+    margin: 40px 0 16px;
+  }
+
+  .contact-wrap {
+    text-align: center;
+    word-break: break-word;
+  }
 }
 
 </style>
