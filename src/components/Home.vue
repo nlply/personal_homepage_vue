@@ -60,8 +60,7 @@
               Previously, I obtained my master's and bachelor's degrees from
               🇨🇳 Tianjin University (Peiyang University) and 🇨🇳 Tianjin Normal University, respectively.
               In addition, I have three years of full-time (after my bachelor's degree) and three years of part-time
-              (during
-              my master's degree) development experience.
+              (during my master's degree) development experience.
               I have worked as a technical core in our team and I have extensive programming experience.
               Please do not hesitate to contact me if you are interested in working with me on some interesting
               projects.
@@ -71,6 +70,15 @@
       </div>
       <div class="main-column">
         <n-flax class="text-align-style">
+            <p class="main-title"><span class="main-title-icon">📰</span><span class="main-title-text">News</span></p>
+            <ul class="text-style">
+              <li v-for="news in newsList" :key="news.date + news.title" class="news-item">
+                <span class="text-bold-style news-date">{{ news.date }}:</span>
+                <n-a v-if="news.url" :href="news.url" target="_blank" class="news-link">{{ news.title }}</n-a>
+                <span v-else>{{ news.title }}</span>
+                <span v-if="news.note" class="news-note"> {{ news.note }}</span>
+              </li>
+            </ul>
 
             <p class="main-title"><span class="main-title-icon">🧑‍🔬</span><span class="main-title-text">Research</span></p>
             <span class="text-style">
@@ -108,7 +116,7 @@
             </ul>
 
 
-            <p class="main-title"><span class="main-title-icon">✍</span><span class="main-title-text">Publications</span></p>
+            <p class="main-title"><span class="main-title-icon">📘</span><span class="main-title-text">Publications</span></p>
 
             <ul class="text-style">
               <div v-for="publication in this.publications" :key="publication.year">
@@ -116,7 +124,7 @@
                     <span class="text-bold-style publication-year-text">{{ publication.year }}</span>
                   </div>
                 <li v-for="paper in publication.papers">
-                  <div class="paper-container">
+                  <div class="paper-container" :style="getPaperBackgroundStyle(paper)">
                     <n-a class="hover-style title-style paper-title" type="success" v-if="paper.title" :href="paper.titleURL"
                         target="_blank">{{ paper.title }}
                     </n-a>
@@ -128,7 +136,12 @@
                       }}</span> -->
                     <n-flex class="paper-authors">
                       <div v-for="(auther, index) in paper.authers">
-                        <span :class="{ 'text-bold-style': auther == paper.boldAuther }">{{ auther }}</span>
+                        <span :class="{ 'text-bold-style': auther == paper.boldAuther }">
+                          {{ auther }}
+                          <span v-if="paper.authers.length === 1" class="single-author-badge" title="Single-authored paper">
+                            Single-Authored
+                          </span>
+                        </span>
                         <span v-if="index !== paper.authers.length - 1">
                           <span v-if="index === paper.authers.length - 2">
                             <span v-if="paper.authers.length > 2">,</span>&nbsp;and&nbsp;
@@ -138,7 +151,18 @@
                       </div>
                     </n-flex>
                     <n-text class="text-bold-style paper-conference">{{ paper.conference }}.</n-text>
-                    <n-text class="text-bold-style paper-conference" type="error" v-if="paper.tag">&nbsp;{{ paper.tag }}.</n-text>
+                    <n-tooltip
+                      v-if="paper.tag && paper.tag.toLowerCase().includes('best paper')"
+                      trigger="hover"
+                    >
+                      <template #trigger>
+                        <span class="paper-tag-badge best-paper-badge">{{ paper.tag }}</span>
+                      </template>
+                      Best Paper Award, The 40th Annual AAAI Conference on Artificial Intelligence@Singapore
+                    </n-tooltip>
+                    <span v-else-if="paper.tag" class="paper-tag-badge">
+                      {{ paper.tag }}
+                    </span>
                     <!-- <br> -->
                     <!-- <span v-if="paper.resources.length != 0" class="text-bold-style">
                       .&nbsp;
@@ -265,13 +289,13 @@
               </li>
             </ul>
 
-            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2025 ©
+            <p style="text-align: center;color: #c0c0c0;font-size: 18px;margin-top: 100px;">2026 ©
               Developed by
               <n-a
                   href="https://nlply.tech/">Yang Liu
               </n-a>
               | Last
-              updated: Oct. 2025
+              updated: Feb. 2026
             </p>
         </n-flax>
       </div>
@@ -288,11 +312,29 @@ import {defineComponent, ref} from 'vue'
 export default defineComponent({
   components: {},
   setup() {
+    const newsList = ref([
+      {
+        date: 'Feb. 2026',
+        title: 'Our AAAI 2026 paper received the Best Paper Award.',
+        url: 'https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/',
+      },
+      {
+        date: 'Sept. 2025',
+        title: 'Our paper on social bias alignment was accepted to Findings of EMNLP 2025.',
+        url: 'https://arxiv.org/abs/2509.13869',
+      },
+      {
+        date: 'Jan. 2024',
+        title: 'Two papers on social bias evaluation were accepted to AAAI 2024 and EACL 2024.',
+      },
+    ])
+
     const publications = ref([
         {
           'year': 2026,
           'papers': [
             {
+          id: 'anlp2026-global-values-alignment',
           title: '大規模言語モデルと世界各国の価値観とのアライメント',
           titleExplain: '',
           titleURL: '',
@@ -315,6 +357,7 @@ export default defineComponent({
           ]
         },
             {
+          id: 'understanding-prompt-sensitivity-2026',
           title: 'Understanding the Prompt Sensitivity',
           titleExplain: '',
           titleURL: '',
@@ -337,6 +380,7 @@ export default defineComponent({
           ]
         },
           {
+          id: 'aaai2026-global-human-opinion',
           title: 'On the Alignment of Large Language Models with Global Human Opinion',
           titleExplain: '',
           titleURL: 'https://arxiv.org/abs/2509.01418',
@@ -366,6 +410,7 @@ export default defineComponent({
           "year": 2025,
           "papers": [
           {
+          id: 'findings-emnlp2025-social-bias-values',
           title: 'Do LLMs Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with LLMs',
           titleExplain: '',
           titleURL: 'https://arxiv.org/abs/2509.13869',
@@ -389,6 +434,7 @@ export default defineComponent({
           ]
         },
           {
+          id: 'anlp2025-bias-explanations',
           title: 'Generating Explanations of Stereotypical Biases with Large Language Model\n',
           titleExplain: '',
           titleURL: 'https://www.anlp.jp/proceedings/annual_meeting/2025/pdf_dir/Q5-3.pdf',
@@ -414,6 +460,7 @@ export default defineComponent({
       {
         "year": 2024,
         "papers": [{
+        id: 'eacl2024-quantifying-stereotypes',
         title: 'Quantifying Stereotypes in Language',
         titleExplain: 'single-authored work',
         titleURL: 'https://arxiv.org/abs/2401.15535',
@@ -436,6 +483,7 @@ export default defineComponent({
         ]
       },
       {
+        id: 'aaai2024-robust-bias-evaluation',
         title: 'Robust Evaluation Measures for Evaluating Social Biases in Masked Language Models',
         titleExplain: 'single-authored work',
         titleURL: 'https://arxiv.org/abs/2401.11601',
@@ -461,6 +509,7 @@ export default defineComponent({
       {
         "year": 2023,
         "papers": [{
+        id: 'icann2023-syntax-aware-nmt',
         title: 'Syntax-Aware Complex-Valued Neural Machine Translation',
         titleExplain: '',
         titleURL: 'https://arxiv.org/pdf/2307.08586.pdf',
@@ -483,6 +532,7 @@ export default defineComponent({
         ]
       },
       {
+        id: 'findings-eacl2023-qe-humor',
         title: 'Mining Effective Features Using Quantum Entropy for Humor Recognition',
         titleExplain: 'short paper',
         titleURL: 'https://aclanthology.org/2023.findings-eacl.152/',
@@ -510,8 +560,19 @@ export default defineComponent({
 
     // resume
     const pdf_url = '../../resume.pdf'
+    const getPaperBackgroundStyle = (paper) => {
+      if (!paper?.id) {
+        return {}
+      }
+      return {
+        '--paper-bg-image-png': `url('/paper-backgrounds/${paper.id}.png')`,
+        '--paper-bg-image-jpg': `url('/paper-backgrounds/${paper.id}.jpg')`,
+      }
+    }
     return {
+      newsList,
       publications,
+      getPaperBackgroundStyle,
       pdf() {
         window.open(`/pdf/web/viewer.html?file=${encodeURIComponent(pdf_url)}`);
       },
@@ -694,7 +755,40 @@ export default defineComponent({
 }
 
 .paper-container {
-  margin-bottom: 10px;
+  position: relative;
+  margin-bottom: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #dbe5f5;
+  box-shadow: 0 2px 8px rgba(26, 40, 77, 0.06);
+  background-color: #ffffff;
+}
+
+.paper-container::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  width: calc(100% - 24px);
+  height: 72px;
+  background-image: var(--paper-bg-image-png, none), var(--paper-bg-image-jpg, none);
+  background-position: right bottom, right bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-size: contain, contain;
+  opacity: 0.38;
+  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 6%, rgba(0, 0, 0, 0.9) 58%, rgba(0, 0, 0, 1) 100%);
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 6%, rgba(0, 0, 0, 0.9) 58%, rgba(0, 0, 0, 1) 100%);
+  pointer-events: none;
+}
+
+.paper-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+.paper-container:hover {
+  border-color: #c4d5f0;
+  box-shadow: 0 5px 14px rgba(26, 40, 77, 0.1);
 }
 
 .paper-title {
@@ -710,9 +804,57 @@ export default defineComponent({
   flex-wrap: wrap;
 }
 
+.single-author-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid #d4a017;
+  background: linear-gradient(135deg, #fff7d6, #ffe08a);
+  color: #8a5a00;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
 .paper-conference {
   line-height: 1.25;
 }
+
+.paper-tag-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid #e84a5f;
+  background: #fff2f4;
+  color: #b02337;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  vertical-align: middle;
+}
+
+.best-paper-badge {
+  position: relative;
+  overflow: visible;
+  border-color: #d4af37;
+  background: linear-gradient(135deg, #1f2430, #2d3446);
+  color: #f8e7a1;
+  box-shadow: 0 2px 10px rgba(24, 28, 39, 0.28), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.best-paper-badge::before {
+  content: '🏆';
+  margin-right: 6px;
+  font-size: 12px;
+  line-height: 1;
+}
+
 
 .publication-year {
   display: flex;
@@ -720,9 +862,31 @@ export default defineComponent({
   margin: 12px 0 8px;
 }
 
+
 .publication-year-text {
   font-size: 24px;
   color: #888888;
+}
+
+.news-item {
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+.news-date {
+  margin-right: 6px;
+}
+
+.news-link {
+  text-decoration: none;
+}
+
+.news-link:hover {
+  color: black;
+}
+
+.news-note {
+  color: #666666;
 }
 
 @media (max-width: 640px) {
@@ -748,6 +912,19 @@ export default defineComponent({
     font-size: 28px;
     gap: 10px;
     margin: 40px 0 16px;
+  }
+
+  .paper-container {
+    padding: 10px 11px;
+    border-radius: 12px;
+  }
+
+  .paper-container::after {
+    right: 10px;
+    bottom: 8px;
+    width: calc(100% - 20px);
+    height: 56px;
+    background-size: contain, contain;
   }
 
   .contact-wrap {
