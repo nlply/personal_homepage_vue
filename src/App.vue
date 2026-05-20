@@ -37,6 +37,9 @@ onMounted(() => {
 })
 watchEffect(() => {
   localStorage.setItem('demo-dark', dark.value ? '1' : '0')
+  if (typeof document !== 'undefined') {
+    document.documentElement.dataset.theme = dark.value ? 'dark' : 'light'
+  }
 })
 
 // 你自己的覆盖色
