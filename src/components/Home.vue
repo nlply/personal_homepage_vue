@@ -102,11 +102,20 @@
                     <em>{{ paper.conference }}.</em>
                     <span v-if="paper.tag" class="pub-tag" :class="{ 'pub-tag--best': isBestPaper(paper.tag) }">{{ paper.tag }}</span>
                   </div>
-                  <div v-if="paper.resources && paper.resources.length" class="pub-resources">
+                  <div v-if="(paper.resources && paper.resources.length) || paper.bibtex" class="pub-resources">
                     <template v-for="(resource, index) in paper.resources" :key="resource.name + index">
                       <a class="pub-resource" :href="resource.url" target="_blank">{{ formatResourceName(resource.name) }}</a>
-                      <span v-if="index !== paper.resources.length - 1" class="sep">·</span>
+                      <span v-if="index !== paper.resources.length - 1 || paper.bibtex" class="sep">·</span>
                     </template>
+                    <a v-if="paper.bibtex" class="pub-resource" href="#" @click.prevent="toggleBib(paper.id)">
+                      {{ openBibs[paper.id] ? 'hide BibTex' : 'BibTex' }}
+                    </a>
+                  </div>
+                  <div v-if="paper.bibtex && openBibs[paper.id]" class="pub-bibtex">
+                    <button class="pub-bibtex-copy" type="button" @click="copyBib(paper.bibtex, paper.id)">
+                      {{ copiedBib === paper.id ? 'copied' : 'copy' }}
+                    </button>
+                    <pre class="pub-bibtex-text">{{ paper.bibtex }}</pre>
                   </div>
                 </div>
               </li>
@@ -229,7 +238,13 @@ export default defineComponent({
               name: '[code]',
               url: 'https://github.com/ku-nlp/Understanding_the_Prompt_Sensitivity'
             },
-          ]
+          ],
+          bibtex: `@article{liu2026understanding,
+  title={Understanding the Prompt Sensitivity},
+  author={Liu, Yang and Chu, Chenhui},
+  journal={arXiv preprint arXiv:2604.18389},
+  year={2026}
+}`
         },
             {
           id: 'anlp2026-global-values-alignment',
@@ -256,7 +271,16 @@ export default defineComponent({
               name: '[code]',
               url: 'https://github.com/nlply/global-opinion-alignment'
             },
-          ]
+          ],
+          bibtex: `@inproceedings{liu2026alignment,
+  title={On the alignment of large language models with global human opinion},
+  author={Liu, Yang and Kaneko, Masahiro and Chu, Chenhui},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={40},
+  number={44},
+  pages={37673--37681},
+  year={2026}
+}`
         },
 
           ]
@@ -278,7 +302,25 @@ export default defineComponent({
               url: 'https://github.com/ku-nlp/Evaluate-Alignment-HVSB',
               buttonType: 'info'
             },
-          ]
+          ],
+          bibtex: `@inproceedings{liu-chu-2025-llms,
+    title = "Do {LLM}s Align Human Values Regarding Social Biases? Judging and Explaining Social Biases with {LLM}s",
+    author = "Liu, Yang  and
+      Chu, Chenhui",
+    editor = "Christodoulopoulos, Christos  and
+      Chakraborty, Tanmoy  and
+      Rose, Carolyn  and
+      Peng, Violet",
+    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2025",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.findings-emnlp.1178/",
+    doi = "10.18653/v1/2025.findings-emnlp.1178",
+    pages = "21591--21628",
+    ISBN = "979-8-89176-335-7"
+}`
         },
           {
           id: 'anlp2025-bias-explanations',
@@ -306,7 +348,14 @@ export default defineComponent({
             name: '[code]',
             url: 'https://github.com/nlply/quantifying-stereotypes-in-language'
           },
-        ]
+        ],
+        bibtex: `@inproceedings{liu2024quantifying,
+  title={Quantifying stereotypes in language},
+  author={Liu, Yang},
+  booktitle={Proceedings of the 18th Conference of the European Chapter of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={1223--1240},
+  year={2024}
+}`
       },
       {
         id: 'aaai2024-robust-bias-evaluation',
@@ -321,7 +370,16 @@ export default defineComponent({
             name: '[code]',
             url: 'https://github.com/nlply/robust-bias-evaluation-measures'
           },
-        ]
+        ],
+        bibtex: `@inproceedings{liu2024robust,
+  title={Robust evaluation measures for evaluating social biases in masked language models},
+  author={Liu, Yang},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={38},
+  number={17},
+  pages={18707--18715},
+  year={2024}
+}`
       },]
       },
       {
@@ -334,7 +392,15 @@ export default defineComponent({
         authers: ['Yang Liu', 'Yuexian Hou'],
         boldAuther: 'Yang Liu',
         conference: 'ICANN 2023',
-        resources: []
+        resources: [],
+        bibtex: `@inproceedings{liu2023syntax,
+  title={Syntax-aware complex-valued neural machine translation},
+  author={Liu, Yang and Hou, Yuexian},
+  booktitle={International Conference on Artificial Neural Networks},
+  pages={474--485},
+  year={2023},
+  organization={Springer}
+}`
       },
       {
         id: 'findings-eacl2023-qe-humor',
@@ -349,11 +415,40 @@ export default defineComponent({
             name: '[code]',
             url: 'https://github.com/nlply/EACL2023-QE-Features'
           },
-        ]
+        ],
+        bibtex: `@inproceedings{liu2023mining,
+  title={Mining effective features using quantum entropy for humor recognition},
+  author={Liu, Yang and Hou, Yuexian},
+  booktitle={Findings of the Association for Computational Linguistics: EACL 2023},
+  pages={2048--2053},
+  year={2023}
+}`
       }]
       }
     ])
 
+
+    const openBibs = ref({})
+    const copiedBib = ref('')
+    const toggleBib = (id) => {
+      openBibs.value[id] = !openBibs.value[id]
+    }
+    const copyBib = async (text, id) => {
+      try {
+        await navigator.clipboard.writeText(text)
+      } catch (e) {
+        const ta = document.createElement('textarea')
+        ta.value = text
+        document.body.appendChild(ta)
+        ta.select()
+        document.execCommand('copy')
+        document.body.removeChild(ta)
+      }
+      copiedBib.value = id
+      setTimeout(() => {
+        if (copiedBib.value === id) copiedBib.value = ''
+      }, 1500)
+    }
 
     const pdf_url = '../../resume.pdf'
     const getPaperThumbStyle = (paper) => {
@@ -379,6 +474,10 @@ export default defineComponent({
     return {
       newsList,
       publications,
+      openBibs,
+      copiedBib,
+      toggleBib,
+      copyBib,
       getPaperThumbStyle,
       formatResourceName,
       isBestPaper,
@@ -751,10 +850,50 @@ html[data-theme="dark"] .home-page {
 .pub-resource {
   color: var(--link);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .pub-resource:hover {
   text-decoration: underline;
+}
+
+.pub-bibtex {
+  position: relative;
+  margin-top: 8px;
+  padding: 10px 12px;
+  padding-right: 64px;
+  background: var(--bg-thumb);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+}
+
+.pub-bibtex-text {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--fg);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.pub-bibtex-copy {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--link);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.pub-bibtex-copy:hover {
+  background: var(--border-soft);
 }
 
 /* ---------- Experience ---------- */
