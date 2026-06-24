@@ -79,9 +79,11 @@
 
         <section class="section">
           <h2 class="section-title">Publications</h2>
-          <div v-for="publication in publications" :key="publication.year" class="pub-group">
-            <div class="pub-year">{{ publication.year }}</div>
-            <ol class="pub-list">
+          <template v-for="category in publicationCategories" :key="category.label">
+            <h3 class="section-subtitle">{{ category.label }}</h3>
+            <div v-for="publication in category.groups" :key="category.label + '-' + (publication.year || 'flat')" class="pub-group">
+              <div v-if="publication.year" class="pub-year">{{ publication.year }}</div>
+              <ol class="pub-list">
               <li v-for="paper in publication.papers" :key="paper.id" class="pub-item">
                 <div class="pub-thumb" :style="getPaperThumbStyle(paper)"></div>
                 <div class="pub-text">
@@ -120,7 +122,8 @@
                 </div>
               </li>
             </ol>
-          </div>
+            </div>
+          </template>
         </section>
 
         <section class="section">
@@ -195,7 +198,7 @@
 
 <script>
 
-import {defineComponent, ref} from 'vue'
+import {defineComponent, ref, computed} from 'vue'
 
 export default defineComponent({
   components: {},
@@ -226,6 +229,30 @@ export default defineComponent({
           'year': 2026,
           'papers': [
             {
+          id: 'preprint-2026-sentence-contextual-entrainment',
+          title: 'Sentence-Level Contextual Entrainment in Large Language Models',
+          titleExplain: '',
+          titleURL: 'https://arxiv.org/abs/2606.24077',
+          authers: ['Yang Liu', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: 'arXiv 2026',
+          resources: [
+            {
+              name: '[code]',
+              url: 'https://github.com/ku-nlp/Sentence-Level_Contextual_Entrainment_in_LLMs'
+            },
+          ],
+          bibtex: `@misc{liu2026sentencelevelcontextualentrainmentlarge,
+      title={Sentence-Level Contextual Entrainment in Large Language Models},
+      author={Yang Liu and Chenhui Chu},
+      year={2026},
+      eprint={2606.24077},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2606.24077},
+}`
+        },
+            {
           id: 'understanding-prompt-sensitivity-2026',
           title: 'Understanding the Prompt Sensitivity',
           titleExplain: '',
@@ -255,6 +282,7 @@ export default defineComponent({
           boldAuther: 'Yang Liu',
           conference: '言語処理学会第32回年次大会 (ANLP2026)',
           tag: '委員特別賞',
+          peerReviewed: false,
           resources: []
         },
           {
@@ -270,6 +298,10 @@ export default defineComponent({
             {
               name: '[code]',
               url: 'https://github.com/nlply/global-opinion-alignment'
+            },
+            {
+              name: '[supp]',
+              url: '/supplementary/aaai2026-global-human-opinion.pdf'
             },
           ],
           bibtex: `@inproceedings{liu2026alignment,
@@ -330,6 +362,7 @@ export default defineComponent({
           authers: ['Yang Liu', 'Chenhui Chu'],
           boldAuther: 'Yang Liu',
           conference: '言語処理学会第31回年次大会 (ANLP2025)',
+          peerReviewed: false,
           resources: []
         },]
       },
@@ -428,6 +461,31 @@ export default defineComponent({
     ])
 
 
+    const publicationCategories = computed(() => {
+      const peerReviewedGroups = publications.value
+        .map((group) => ({
+          year: group.year,
+          papers: group.papers.filter((p) => p.peerReviewed !== false),
+        }))
+        .filter((group) => group.papers.length > 0)
+
+      const nonPeerReviewedPapers = publications.value.flatMap((group) =>
+        group.papers.filter((p) => p.peerReviewed === false)
+      )
+
+      const categories = []
+      if (peerReviewedGroups.length > 0) {
+        categories.push({ label: 'International Conferences', groups: peerReviewedGroups })
+      }
+      if (nonPeerReviewedPapers.length > 0) {
+        categories.push({
+          label: 'Domestic Conferences',
+          groups: [{ year: null, papers: nonPeerReviewedPapers }],
+        })
+      }
+      return categories
+    })
+
     const openBibs = ref({})
     const copiedBib = ref('')
     const toggleBib = (id) => {
@@ -450,7 +508,6 @@ export default defineComponent({
       }, 1500)
     }
 
-    const pdf_url = '../../resume.pdf'
     const getPaperThumbStyle = (paper) => {
       if (!paper?.id) {
         return {}
@@ -474,6 +531,7 @@ export default defineComponent({
     return {
       newsList,
       publications,
+      publicationCategories,
       openBibs,
       copiedBib,
       toggleBib,
@@ -482,7 +540,7 @@ export default defineComponent({
       formatResourceName,
       isBestPaper,
       pdf() {
-        window.open(`/pdf/web/viewer.html?file=${encodeURIComponent(pdf_url)}`);
+        window.open('/resume.pdf');
       },
       github() {
         window.open(`https://github.com/nlply`);
@@ -664,6 +722,19 @@ html[data-theme="dark"] .home-page {
   padding-bottom: 6px;
   border-bottom: 1px solid var(--border);
   letter-spacing: 0.3px;
+}
+
+.section-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--fg-muted);
+  margin: 24px 0 4px;
+  letter-spacing: 0.2px;
+}
+
+.section-subtitle:first-of-type {
+  margin-top: 8px;
 }
 
 .plain-list {
