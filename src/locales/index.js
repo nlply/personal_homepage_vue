@@ -13,16 +13,17 @@ export const LOCALES = [
 ]
 
 const STORAGE_KEY = 'locale'
+const DEFAULT_LOCALE = 'en'
 
-function detectLocale() {
+// 首次访问一律用英文；只有用户手动切换过才沿用其选择
+function initialLocale() {
   const saved = localStorage.getItem(STORAGE_KEY)
   if (saved && packs[saved]) return saved
-  const nav = (navigator.language || 'en').toLowerCase()
-  return nav.startsWith('zh') ? 'zh' : 'en'
+  return DEFAULT_LOCALE
 }
 
 // 全局单例：任何组件 import 后都能读写并保持响应式
-export const locale = ref(detectLocale())
+export const locale = ref(initialLocale())
 
 watchEffect(() => {
   localStorage.setItem(STORAGE_KEY, locale.value)
