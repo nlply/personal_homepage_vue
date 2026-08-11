@@ -4,9 +4,17 @@
       <header class="profile-header">
         <img class="avatar" alt="avatar" src="../assets/avatar.png">
         <div class="identity">
-          <h1 class="name">Yang Liu</h1>
-          <p class="role">Ph.D. student at Kyoto University</p>
-          <p class="affiliation">Language Media Processing Lab, Kyoto University</p>
+          <h1 class="name">{{ c.name }}</h1>
+          <div class="positions">
+            <div v-for="position in c.positions" :key="position.role" class="position">
+              <p class="role">{{ position.role }}</p>
+              <p class="affiliation">{{ position.affiliation }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 通栏：横跨照片和正文两列 -->
+        <div class="profile-meta">
           <p class="contact">
             <a class="contact-link" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp">yangliu [at] nlp.ist.i.kyoto-u.ac.jp</a>
             <span class="sep">·</span>
@@ -27,19 +35,19 @@
       </header>
 
       <main class="main">
-        <p class="bio">
-          I am a Ph.D. student at Kyoto University, working under the supervision of Prof. Chenhui Chu.
-          I focus on AI fairness, language modeling, quantum theory, and related directions.
-          Previously, I obtained my master's and bachelor's degrees from Tianjin University (Peiyang University)
-          and Tianjin Normal University, respectively. In addition, I have three years of full-time and three
-          years of part-time software development experience. Please feel free to contact me if you are interested
-          in working together.
-        </p>
+        <p class="bio">{{ c.bio }}</p>
+
+        <div class="collab-note">
+          <p class="collab-text">
+            {{ c.collab.prefix }}<a class="collab-link" href="mailto:yangliu.nlp@gmail.com">{{ c.collab.linkText }}</a>{{ c.collab.suffix }}
+          </p>
+          <p class="collab-policy">{{ c.collab.policy }}</p>
+        </div>
 
         <section class="section">
-          <h2 class="section-title">News</h2>
+          <h2 class="section-title">{{ c.sections.news }}</h2>
           <ul class="plain-list news-list">
-            <li v-for="news in newsList" :key="news.date + news.title" class="news-item">
+            <li v-for="news in c.news" :key="news.date + news.title" class="news-item">
               <span class="news-date">{{ news.date }}</span>
               <span class="news-body">
                 <a v-if="news.url" :href="news.url" target="_blank" class="news-link">{{ news.title }}</a>
@@ -51,34 +59,23 @@
         </section>
 
         <section class="section">
-          <h2 class="section-title">Research Interests</h2>
+          <h2 class="section-title">{{ c.sections.interests }}</h2>
           <ul class="research-list">
-            <li>Cultural alignment of large language models</li>
-            <li>Social biases in large language models</li>
-            <li>Theoretical interpretability of large language models</li>
+            <li v-for="interest in c.interests" :key="interest">{{ interest }}</li>
           </ul>
         </section>
 
         <section class="section">
-          <h2 class="section-title">Awards</h2>
+          <h2 class="section-title">{{ c.sections.awards }}</h2>
           <ul class="plain-list award-list">
-            <li>
-              <a class="text-link" href="https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/" target="_blank">Best Paper Award</a>,
-              The 40th Annual AAAI Conference on Artificial Intelligence, Singapore.
-            </li>
-            <li>
-              <a class="text-link" href="https://anlp.jp/nlp2026/award.html#committee" target="_blank">委員特別賞 (Committee Special Award)</a>,
-              言語処理学会第32回年次大会 (ANLP2026).
-            </li>
-            <li>
-              <a class="text-link" href="https://www.kugd.k.kyoto-u.ac.jp/en/support/recruitlist/" target="_blank">Kyoto University DoGS NEXT AI Program</a>
-              (DoGS Fellow).
+            <li v-for="award in c.awards" :key="award.url">
+              <a class="text-link" :href="award.url" target="_blank">{{ award.label }}</a>{{ award.suffix }}
             </li>
           </ul>
         </section>
 
         <section class="section">
-          <h2 class="section-title">Publications</h2>
+          <h2 class="section-title">{{ c.sections.publications }}</h2>
           <template v-for="category in publicationCategories" :key="category.label">
             <h3 class="section-subtitle">{{ category.label }}</h3>
             <div v-for="publication in category.groups" :key="category.label + '-' + (publication.year || 'flat')" class="pub-group">
@@ -98,7 +95,7 @@
                         <span v-else>, </span>
                       </template>
                     </template>
-                    <span v-if="paper.authers.length === 1" class="author-note"> (single-authored)</span>
+                    <span v-if="paper.authers.length === 1" class="author-note">{{ c.pubUI.singleAuthored }}</span>
                   </div>
                   <div class="pub-venue">
                     <em>{{ paper.conference }}.</em>
@@ -110,12 +107,12 @@
                       <span v-if="index !== paper.resources.length - 1 || paper.bibtex" class="sep">·</span>
                     </template>
                     <a v-if="paper.bibtex" class="pub-resource" href="#" @click.prevent="toggleBib(paper.id)">
-                      {{ openBibs[paper.id] ? 'hide BibTex' : 'BibTex' }}
+                      {{ openBibs[paper.id] ? c.pubUI.hideBibtex : c.pubUI.bibtex }}
                     </a>
                   </div>
                   <div v-if="paper.bibtex && openBibs[paper.id]" class="pub-bibtex">
                     <button class="pub-bibtex-copy" type="button" @click="copyBib(paper.bibtex, paper.id)">
-                      {{ copiedBib === paper.id ? 'copied' : 'copy' }}
+                      {{ copiedBib === paper.id ? c.pubUI.copied : c.pubUI.copy }}
                     </button>
                     <pre class="pub-bibtex-text">{{ paper.bibtex }}</pre>
                   </div>
@@ -127,51 +124,43 @@
         </section>
 
         <section class="section">
-          <h2 class="section-title">Experience</h2>
+          <h2 class="section-title">{{ c.sections.experience }}</h2>
           <ul class="plain-list exp-list">
-            <li>
-              <span class="exp-date">Mar. 2023 – Sept. 2024</span>
+            <li v-for="exp in c.experience" :key="exp.date">
+              <span class="exp-date">{{ exp.date }}</span>
               <span class="exp-body">
-                <span class="exp-role">Independent Researcher</span>
-                <span class="exp-desc"> — Research on social biases in language models.</span>
-              </span>
-            </li>
-            <li>
-              <span class="exp-date">Jul. 2016 – Sept. 2019</span>
-              <span class="exp-body">
-                <span class="exp-role">Full-Stack Software Engineer, Antrou Co. Ltd.</span>
-                <span class="exp-desc"> — Geographical Information System (Three.js) and Security Management System
-                  for Petrochemical Industry.</span>
+                <span class="exp-role">{{ exp.role }}</span>
+                <span class="exp-desc"> — {{ exp.desc }}</span>
               </span>
             </li>
           </ul>
         </section>
 
         <section class="section">
-          <h2 class="section-title">Technical Skills</h2>
+          <h2 class="section-title">{{ c.sections.skills }}</h2>
           <ul class="plain-list skill-list">
-            <li><strong>Programming:</strong> Python, PyTorch, Java, JavaScript, CSS.</li>
-            <li><strong>Techniques:</strong> Natural Language Processing, Deep Learning, Machine Learning, Quantum Theory,
-              Web Application Development.</li>
+            <li v-for="skill in c.skills" :key="skill.label">
+              <strong>{{ skill.label }}</strong>{{ skill.value }}
+            </li>
           </ul>
         </section>
 
         <section class="section">
-          <h2 class="section-title">Links</h2>
+          <h2 class="section-title">{{ c.sections.links }}</h2>
           <ul class="plain-list link-list">
-            <li>Personal Blog: <a class="text-link" href="https://www.nlply.tech" target="_blank">nlply.tech</a></li>
-            <li>GitHub: <a class="text-link" href="https://github.com/nlply" target="_blank">github.com/nlply</a></li>
-            <li>Hugging Face: <a class="text-link" href="https://huggingface.co/nlply" target="_blank">huggingface.co/nlply</a></li>
+            <li v-for="link in c.links" :key="link.url">
+              {{ link.label }}<a class="text-link" :href="link.url" target="_blank">{{ link.text }}</a>
+            </li>
           </ul>
         </section>
 
         <section class="section">
-          <h2 class="section-title">Reviewing</h2>
+          <h2 class="section-title">{{ c.sections.reviewing }}</h2>
           <p class="reviewer-line">ARR · AAAI · NeurIPS</p>
         </section>
 
         <section class="section">
-          <h2 class="section-title">Useful Resources</h2>
+          <h2 class="section-title">{{ c.sections.resources }}</h2>
           <ul class="plain-list resource-list">
             <li><a class="text-link" target="_blank" href="https://aclanthology.org">ACL Anthology</a></li>
             <li><a class="text-link" target="_blank" href="https://huggingface.co/spaces/teelinsan/aclpubcheck">ACL Pub Check</a></li>
@@ -186,9 +175,12 @@
         </section>
 
         <footer class="footer">
-          © 2026 · Developed by
-          <a class="text-link" href="https://nlply.tech/">Yang Liu</a>
-          · Last updated May 2026
+          © 2026 · {{ c.footer.developedByPrefix }}
+          <a class="text-link" href="https://nlply.tech/">{{ c.name }}</a>
+          {{ c.footer.and }}
+          <a class="text-link" href="https://claude.com/claude-code" target="_blank">Claude Code</a>
+          <template v-if="c.footer.developedBySuffix">{{ c.footer.developedBySuffix }}</template>
+          · {{ c.footer.lastUpdated }}
         </footer>
       </main>
     </div>
@@ -199,30 +191,13 @@
 <script>
 
 import {defineComponent, ref, computed} from 'vue'
+import {useContent} from '@/locales'
 
 export default defineComponent({
   components: {},
   setup() {
-    const newsList = ref([
-      {
-        date: 'May 2026',
-        title: 'Our paper on understanding prompt sensitivity was accepted to ACL 2026.',
-      },
-      {
-        date: 'Feb. 2026',
-        title: 'Our AAAI 2026 paper received the Best Paper Award.',
-        url: 'https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/',
-      },
-      {
-        date: 'Sept. 2025',
-        title: 'Our paper on social bias alignment was accepted to Findings of EMNLP 2025.',
-        url: 'https://arxiv.org/abs/2509.13869',
-      },
-      {
-        date: 'Jan. 2024',
-        title: 'Two papers on social bias evaluation were accepted to AAAI 2024 and EACL 2024.',
-      },
-    ])
+    // 当前语言的文案包；论文数据本身不翻译，保留原文
+    const c = useContent()
 
     const publications = ref([
         {
@@ -475,11 +450,11 @@ export default defineComponent({
 
       const categories = []
       if (peerReviewedGroups.length > 0) {
-        categories.push({ label: 'International Conferences', groups: peerReviewedGroups })
+        categories.push({ label: c.value.pubCategories.international, groups: peerReviewedGroups })
       }
       if (nonPeerReviewedPapers.length > 0) {
         categories.push({
-          label: 'Domestic Conferences',
+          label: c.value.pubCategories.domestic,
           groups: [{ year: null, papers: nonPeerReviewedPapers }],
         })
       }
@@ -529,7 +504,7 @@ export default defineComponent({
       return typeof tag === 'string' && tag.toLowerCase().includes('best paper')
     }
     return {
-      newsList,
+      c,
       publications,
       publicationCategories,
       openBibs,
@@ -580,6 +555,7 @@ export default defineComponent({
   --tag-best-border: #e2c25a;
   --tag-best-icon: #c0922a;
   --sep: #b9b9b9;
+  --collab-bg: #f2f7fd;
 
   width: 100%;
   display: flex;
@@ -614,6 +590,7 @@ html[data-theme="dark"] .home-page {
   --tag-best-border: #8a6b1f;
   --tag-best-icon: #f0c862;
   --sep: #4a4a52;
+  --collab-bg: #16202e;
 }
 
 .home-content {
@@ -626,9 +603,16 @@ html[data-theme="dark"] .home-page {
 .profile-header {
   display: grid;
   grid-template-columns: 200px 1fr;
-  gap: 32px;
+  column-gap: 32px;
+  row-gap: 18px;
   align-items: center;
   margin-bottom: 36px;
+}
+
+/* 邮箱和社交链接横跨两列，落在照片和正文下方 */
+.profile-meta {
+  grid-column: 1 / -1;
+  text-align: center;
 }
 
 .avatar {
@@ -651,6 +635,14 @@ html[data-theme="dark"] .home-page {
   color: var(--fg-strong);
 }
 
+.positions {
+  margin-bottom: 0;
+}
+
+.position + .position {
+  margin-top: 8px;
+}
+
 .role {
   margin: 0 0 4px;
   color: var(--fg);
@@ -658,13 +650,13 @@ html[data-theme="dark"] .home-page {
 }
 
 .affiliation {
-  margin: 0 0 14px;
+  margin: 0;
   color: var(--fg-muted);
   font-size: 15px;
 }
 
 .contact {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
   font-size: 15px;
   color: var(--fg);
 }
@@ -672,6 +664,7 @@ html[data-theme="dark"] .home-page {
 .contact-link {
   color: var(--link);
   text-decoration: none;
+  word-break: break-word;
 }
 
 .contact-link:hover {
@@ -706,6 +699,36 @@ html[data-theme="dark"] .home-page {
   text-align: justify;
   hyphens: auto;
   color: var(--fg);
+}
+
+/* ---------- Collaboration call-out ---------- */
+
+.collab-note {
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border-left: 3px solid var(--link);
+  border-radius: 0 4px 4px 0;
+  background: var(--collab-bg);
+  color: var(--fg);
+}
+
+.collab-text {
+  margin: 0;
+}
+
+.collab-link {
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.collab-link:hover {
+  text-decoration: underline;
+}
+
+.collab-policy {
+  margin: 8px 0 0;
+  font-weight: 600;
 }
 
 /* ---------- Sections ---------- */
@@ -1036,7 +1059,7 @@ html[data-theme="dark"] .home-page {
   .profile-header {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 18px;
+    row-gap: 18px;
     justify-items: center;
   }
 
@@ -1047,6 +1070,10 @@ html[data-theme="dark"] .home-page {
 
   .identity {
     width: 100%;
+  }
+
+  .name {
+    font-size: 26px;
   }
 
   .pub-item {
@@ -1071,10 +1098,6 @@ html[data-theme="dark"] .home-page {
 
   .section-title {
     font-size: 18px;
-  }
-
-  .name {
-    font-size: 26px;
   }
 }
 </style>
