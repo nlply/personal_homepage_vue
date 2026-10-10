@@ -27,27 +27,26 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watchEffect } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { darkTheme } from 'naive-ui'
 import { locale, LOCALES, useContent } from '@/locales'
 
 const c = useContent()
 
 // 用 boolean 控制主题，避免直接比较对象引用
-const dark = ref(false)
+// 初始值直接读 localStorage：watchEffect 会立即执行并写回，放到 onMounted 里读会被先覆盖掉
+const dark = ref(localStorage.getItem('demo-dark') === '1')
 
 // 由 boolean 派生出 Naive 的主题对象（null = 浅色）
 const theme = computed(() => (dark.value ? darkTheme : null))
 
-// 可选：持久化，刷新后保持用户选择
-onMounted(() => {
-  const saved = localStorage.getItem('demo-dark')
-  if (saved != null) dark.value = saved === '1'
-})
+// 持久化，刷新后保持用户选择；网站图标（苏鲁锭）跟随主题黑白切换
 watchEffect(() => {
   localStorage.setItem('demo-dark', dark.value ? '1' : '0')
   if (typeof document !== 'undefined') {
     document.documentElement.dataset.theme = dark.value ? 'dark' : 'light'
+    const favicon = document.getElementById('favicon')
+    if (favicon) favicon.href = `${process.env.BASE_URL}sulde-${dark.value ? 'white' : 'black'}.svg`
   }
 })
 
