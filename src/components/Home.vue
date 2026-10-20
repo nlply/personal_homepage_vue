@@ -28,8 +28,8 @@
             <a class="social-link social-link--github" href="#" title="GitHub" aria-label="GitHub" @click.prevent="github">
               <v-icon name="fa-github-square" scale="1.5"/>
             </a>
-            <a class="social-link social-link--twitter" href="#" title="Twitter" aria-label="Twitter" @click.prevent="twitter">
-              <v-icon name="fa-twitter-square" scale="1.5"/>
+            <a class="social-link social-link--x" href="#" title="X" aria-label="X" @click.prevent="twitter">
+              <v-icon name="fa-square-x-twitter" scale="1.5"/>
             </a>
             <a class="social-link social-link--linkedin" href="#" title="LinkedIn" aria-label="LinkedIn" @click.prevent="linkedin">
               <v-icon name="bi-linkedin" scale="1.5"/>
@@ -541,7 +541,7 @@ export default defineComponent({
         window.open(`https://github.com/nlply`);
       },
       twitter() {
-        window.open(`https://twitter.com/yangliu_nlp`);
+        window.open(`https://x.com/yangliu_nlp`);
       },
       googlscholar() {
         window.open(`https://scholar.google.com/citations?hl=en&user=8svPv7QAAAAJ&view_op=list_works&gmla=ALUCkoUyN0DPZ0Av4nLTqGPmW-tc8_h0aBvMoVJFI4fBECvN7TVTHYQzzyXBl8mki90dUXvlCHAhgBvAwij_FCRS`);
@@ -636,7 +636,7 @@ export default defineComponent({
 .social-link--scholar { color: #4285f4; }
 .social-link--cv { color: #356db7; }
 .social-link--github { color: var(--brand-github); }
-.social-link--twitter { color: #1da1f2; }
+.social-link--x { color: var(--fg-strong); }
 .social-link--linkedin { color: #0077b5; }
 
 .sep {
