@@ -1,6 +1,6 @@
 <template>
-  <div class="home-page">
-    <div class="home-content">
+  <div class="site-page">
+    <div class="site-content">
       <header class="profile-header">
         <img class="avatar" alt="avatar" src="../assets/avatar.png">
         <div class="identity">
@@ -15,21 +15,25 @@
 
         <!-- 通栏：横跨照片和正文两列 -->
         <div class="profile-meta">
-          <p class="contact">
-            <a class="contact-link" href="mailto:yangliu@nlp.ist.i.kyoto-u.ac.jp">yangliu [at] nlp.ist.i.kyoto-u.ac.jp</a>
-            <span class="sep">·</span>
-            <a class="contact-link" href="mailto:yangliu.nlp@gmail.com">yangliu.nlp [at] gmail.com</a>
-          </p>
           <nav class="social-row">
-            <a class="social-link" href="#" @click.prevent="googlscholar">scholar</a>
-            <span class="sep">/</span>
-            <a class="social-link" href="#" @click.prevent="pdf">cv</a>
-            <span class="sep">/</span>
-            <a class="social-link" href="#" @click.prevent="github">github</a>
-            <span class="sep">/</span>
-            <a class="social-link" href="#" @click.prevent="twitter">twitter</a>
-            <span class="sep">/</span>
-            <a class="social-link" href="#" @click.prevent="linkedin">linkedin</a>
+            <a class="social-link social-link--email" href="mailto:yangliu.nlp@gmail.com" title="yangliu.nlp [at] gmail.com" aria-label="Email">
+              <v-icon name="fa-envelope-square" scale="1.5"/>
+            </a>
+            <a class="social-link social-link--scholar" href="#" title="Google Scholar" aria-label="Google Scholar" @click.prevent="googlscholar">
+              <v-icon name="ai-google-scholar-square" scale="1.5"/>
+            </a>
+            <a class="social-link social-link--cv" href="#" title="CV" aria-label="CV" @click.prevent="pdf">
+              <v-icon name="ai-cv-square" scale="1.5"/>
+            </a>
+            <a class="social-link social-link--github" href="#" title="GitHub" aria-label="GitHub" @click.prevent="github">
+              <v-icon name="fa-github-square" scale="1.5"/>
+            </a>
+            <a class="social-link social-link--twitter" href="#" title="Twitter" aria-label="Twitter" @click.prevent="twitter">
+              <v-icon name="fa-twitter-square" scale="1.5"/>
+            </a>
+            <a class="social-link social-link--linkedin" href="#" title="LinkedIn" aria-label="LinkedIn" @click.prevent="linkedin">
+              <v-icon name="bi-linkedin" scale="1.5"/>
+            </a>
           </nav>
         </div>
       </header>
@@ -123,6 +127,20 @@
           </template>
         </section>
 
+        <!-- 博客：主页只列目录，点标题进入全文；文章在 src/posts/ 下用 Markdown 编写 -->
+        <section v-if="posts.length" id="blog" class="section">
+          <h2 class="section-title">{{ c.sections.blog }}</h2>
+          <ul class="plain-list blog-list">
+            <li v-for="post in posts" :key="post.slug" class="blog-item">
+              <span class="blog-date">{{ post.date }}</span>
+              <span class="blog-body">
+                <router-link class="blog-link" :to="{ name: 'post', params: { slug: post.slug } }">{{ post.title }}</router-link>
+                <span v-if="post.draft" class="blog-draft">{{ c.blogUI.draft }}</span>
+              </span>
+            </li>
+          </ul>
+        </section>
+
         <section class="section">
           <h2 class="section-title">{{ c.sections.experience }}</h2>
           <ul class="plain-list exp-list">
@@ -192,6 +210,7 @@
 
 import {defineComponent, ref, computed} from 'vue'
 import {useContent} from '@/locales'
+import {posts} from '@/blog'
 
 export default defineComponent({
   components: {},
@@ -505,6 +524,7 @@ export default defineComponent({
     }
     return {
       c,
+      posts,
       publications,
       publicationCategories,
       openBibs,
@@ -536,68 +556,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.home-page {
-  --fg: #2d2d2d;
-  --fg-strong: #1a1a1a;
-  --fg-muted: #6a6a6a;
-  --fg-faint: #9a9a9a;
-  --link: #1772d0;
-  --bg: #ffffff;
-  --bg-thumb: #f6f6f6;
-  --border: #e4e4e4;
-  --border-soft: #f0f0f0;
-  --thumb-border: #ececec;
-  --tag-fg: #8a4b00;
-  --tag-bg: #fff4e0;
-  --tag-border: #f0d0a0;
-  --tag-best-fg: #6b4400;
-  --tag-best-bg: #fff1c5;
-  --tag-best-border: #e2c25a;
-  --tag-best-icon: #c0922a;
-  --sep: #b9b9b9;
-  --collab-bg: #f2f7fd;
-
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 56px 24px 80px;
-  box-sizing: border-box;
-  color: var(--fg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
-    Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    sans-serif;
-  line-height: 1.65;
-  font-size: 16px;
-  background: var(--bg);
-}
-
-html[data-theme="dark"] .home-page {
-  --fg: #d8d8d8;
-  --fg-strong: #f0f0f0;
-  --fg-muted: #9a9a9a;
-  --fg-faint: #6a6a6a;
-  --link: #6db7ff;
-  --bg: #101014;
-  --bg-thumb: #1d1d22;
-  --border: #2a2a31;
-  --border-soft: #1f1f24;
-  --thumb-border: #2a2a31;
-  --tag-fg: #ffd9a3;
-  --tag-bg: #3a2a14;
-  --tag-border: #6b4a1f;
-  --tag-best-fg: #ffe89a;
-  --tag-best-bg: #3a2e0e;
-  --tag-best-border: #8a6b1f;
-  --tag-best-icon: #f0c862;
-  --sep: #4a4a52;
-  --collab-bg: #16202e;
-}
-
-.home-content {
-  width: 100%;
-  max-width: 820px;
-}
-
 /* ---------- Header ---------- */
 
 .profile-header {
@@ -655,36 +613,31 @@ html[data-theme="dark"] .home-page {
   font-size: 15px;
 }
 
-.contact {
-  margin: 0 0 6px;
-  font-size: 15px;
-  color: var(--fg);
-}
-
-.contact-link {
-  color: var(--link);
-  text-decoration: none;
-  word-break: break-word;
-}
-
-.contact-link:hover {
-  text-decoration: underline;
-}
-
 .social-row {
-  font-size: 15px;
-  color: var(--fg);
+  display: flex;
+  justify-content: center;
+  gap: 14px;
 }
 
+/* 图标默认用 currentColor 填充，这里给每个链接设品牌色 */
 .social-link {
-  color: var(--link);
-  text-decoration: none;
+  display: inline-flex;
   cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
 }
 
-.social-link:hover {
-  text-decoration: underline;
+.social-link:hover,
+.social-link:focus-visible {
+  opacity: 0.8;
+  transform: translateY(-2px);
 }
+
+.social-link--email { color: #ea4335; }
+.social-link--scholar { color: #4285f4; }
+.social-link--cv { color: #356db7; }
+.social-link--github { color: var(--brand-github); }
+.social-link--twitter { color: #1da1f2; }
+.social-link--linkedin { color: #0077b5; }
 
 .sep {
   color: var(--sep);
@@ -990,6 +943,40 @@ html[data-theme="dark"] .home-page {
   background: var(--border-soft);
 }
 
+/* ---------- Blog ---------- */
+
+.blog-list .blog-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  padding: 4px 0;
+  align-items: baseline;
+}
+
+.blog-date {
+  color: var(--fg-muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+
+.blog-link {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.blog-link:hover {
+  text-decoration: underline;
+}
+
+.blog-draft {
+  margin-left: 8px;
+  padding: 0 6px;
+  font-size: 12px;
+  color: var(--fg-muted);
+  border: 1px dashed var(--sep);
+  border-radius: 3px;
+}
+
 /* ---------- Experience ---------- */
 
 .exp-list li {
@@ -1051,11 +1038,6 @@ html[data-theme="dark"] .home-page {
 /* ---------- Responsive ---------- */
 
 @media (max-width: 720px) {
-  .home-page {
-    padding: 28px 16px 60px;
-    font-size: 15px;
-  }
-
   .profile-header {
     grid-template-columns: 1fr;
     text-align: center;
@@ -1086,7 +1068,8 @@ html[data-theme="dark"] .home-page {
     height: 140px;
   }
 
-  .news-list .news-item {
+  .news-list .news-item,
+  .blog-list .blog-item {
     grid-template-columns: 1fr;
     gap: 2px;
   }

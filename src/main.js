@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import naive from 'naive-ui'
 // import '@/assets/styles/global.css'
+import '@/assets/theme.css'
 
 // add oh-vue-icons https://oh-vue-icons.js.org/
 import { OhVueIcon, addIcons } from "oh-vue-icons";
@@ -12,12 +13,14 @@ import { AiCvSquare } from "oh-vue-icons/icons";
 import { FaGithubSquare } from "oh-vue-icons/icons";
 import { FaTwitterSquare } from "oh-vue-icons/icons";
 import { BiLinkedin } from "oh-vue-icons/icons";
+import { FaEnvelopeSquare } from "oh-vue-icons/icons";
 
 addIcons(AiGoogleScholarSquare);
 addIcons(AiCvSquare);
 addIcons(FaGithubSquare);
 addIcons(FaTwitterSquare);
 addIcons(BiLinkedin);
+addIcons(FaEnvelopeSquare);
 
 const app = createApp(App)
 app.use(router)

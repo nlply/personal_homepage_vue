@@ -34,6 +34,7 @@ export default {
     interests: '研究方向',
     awards: '获奖',
     publications: '论文发表',
+    blog: '博客',
     experience: '工作经历',
     skills: '技术技能',
     links: '链接',
@@ -104,6 +105,12 @@ export default {
     hideBibtex: '收起 BibTex',
     copy: '复制',
     copied: '已复制',
+  },
+
+  blogUI: {
+    back: '← 返回主页',
+    notFound: '没有找到这篇文章。',
+    draft: '草稿',
   },
 
   experience: [

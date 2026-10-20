@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build && cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "@vicons/ionicons5": "^0.12.0",
+    "markdown-it": "^14.3.2",
     "oh-vue-icons": "^1.0.0-rc3",
     "vue": "^3.2.26",
     "vue-router": "^4.0.3"

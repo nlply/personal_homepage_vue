@@ -37,6 +37,7 @@ export default {
     interests: 'Research Interests',
     awards: 'Awards',
     publications: 'Publications',
+    blog: 'Blog',
     experience: 'Experience',
     skills: 'Technical Skills',
     links: 'Links',
@@ -107,6 +108,12 @@ export default {
     hideBibtex: 'hide BibTex',
     copy: 'copy',
     copied: 'copied',
+  },
+
+  blogUI: {
+    back: '← Back to home',
+    notFound: 'This post does not exist.',
+    draft: 'draft',
   },
 
   experience: [
