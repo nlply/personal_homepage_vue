@@ -174,7 +174,13 @@
 
         <section class="section">
           <h2 class="section-title">{{ c.sections.reviewing }}</h2>
-          <p class="reviewer-line">ARR · AAAI · NeurIPS</p>
+          <h3 class="section-subtitle">{{ c.reviewCategories.conference }}</h3>
+          <p class="reviewer-line">ARR · AAAI · NeurIPS · ICLR · NLPCC</p>
+          <h3 class="section-subtitle">{{ c.reviewCategories.workshop }}</h3>
+          <ul class="plain-list reviewer-list">
+            <li>LASS @ CIKM 2026</li>
+            <li>PlurVA-LLM @ AACL-IJCNLP 2026</li>
+          </ul>
         </section>
 
         <section class="section">
@@ -191,6 +197,8 @@
             <li><a class="text-link" target="_blank" href="https://openreview.net/group?id=aclweb.org/ACL/ARR">ACL Rolling Review</a></li>
           </ul>
         </section>
+
+        <visitor-map/>
 
         <footer class="footer">
           © 2026 · {{ c.footer.developedByPrefix }}
@@ -211,9 +219,10 @@
 import {defineComponent, ref, computed} from 'vue'
 import {useContent} from '@/locales'
 import {posts} from '@/blog'
+import VisitorMap from '@/components/VisitorMap.vue'
 
 export default defineComponent({
-  components: {},
+  components: {VisitorMap},
   setup() {
     // 当前语言的文案包；论文数据本身不翻译，保留原文
     const c = useContent()
@@ -223,6 +232,26 @@ export default defineComponent({
           'year': 2026,
           'papers': [
             {
+          id: 'preprint-2026-speak-vs-know',
+          title: 'Speak vs. Know: Balancing Behavior and Knowledge Distributions of Large Language Models',
+          titleExplain: '',
+          titleURL: 'https://arxiv.org/abs/2610.27648',
+          authers: ['Yang Liu', 'Masahiro Kaneko', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: 'arXiv 2026',
+          arxiv: true,
+          resources: [],
+          bibtex: `@misc{liu2026speakvsknowbalancing,
+      title={Speak vs. Know: Balancing Behavior and Knowledge Distributions of Large Language Models},
+      author={Yang Liu and Masahiro Kaneko and Chenhui Chu},
+      year={2026},
+      eprint={2610.27648},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2610.27648},
+}`
+        },
+            {
           id: 'preprint-2026-sentence-contextual-entrainment',
           title: 'Sentence-Level Contextual Entrainment in Large Language Models',
           titleExplain: '',
@@ -230,6 +259,7 @@ export default defineComponent({
           authers: ['Yang Liu', 'Chenhui Chu'],
           boldAuther: 'Yang Liu',
           conference: 'arXiv 2026',
+          arxiv: true,
           resources: [
             {
               name: '[code]',
@@ -260,11 +290,23 @@ export default defineComponent({
               url: 'https://github.com/ku-nlp/Understanding_the_Prompt_Sensitivity'
             },
           ],
-          bibtex: `@article{liu2026understanding,
-  title={Understanding the Prompt Sensitivity},
-  author={Liu, Yang and Chu, Chenhui},
-  journal={arXiv preprint arXiv:2604.18389},
-  year={2026}
+          bibtex: `@inproceedings{liu-chu-2026-understanding,
+    title = "Understanding the Prompt Sensitivity",
+    author = "Liu, Yang  and
+      Chu, Chenhui",
+    editor = "Liakata, Maria  and
+      Moreira, Viviane P.  and
+      Zhang, Jiajun  and
+      Jurgens, David",
+    booktitle = "Proceedings of the 64th Annual Meeting of the {A}ssociation for {C}omputational {L}inguistics (Volume 1: Long Papers)",
+    month = jul,
+    year = "2026",
+    address = "San Diego, California, United States",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2026.acl-long.2053/",
+    doi = "10.18653/v1/2026.acl-long.2053",
+    pages = "44362--44388",
+    ISBN = "979-8-89176-390-6"
 }`
         },
             {
@@ -337,7 +379,7 @@ export default defineComponent({
       Chakraborty, Tanmoy  and
       Rose, Carolyn  and
       Peng, Violet",
-    booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2025",
+    booktitle = "Findings of the {A}ssociation for {C}omputational {L}inguistics: {EMNLP} 2025",
     month = nov,
     year = "2025",
     address = "Suzhou, China",
@@ -456,18 +498,29 @@ export default defineComponent({
 
 
     const publicationCategories = computed(() => {
+      // arXiv 预印本单独成组放在最前；其余按是否同行评审分成国际会议和日本国内会议
+      const arxivPapers = publications.value.flatMap((group) =>
+        group.papers.filter((p) => p.arxiv)
+      )
+
       const peerReviewedGroups = publications.value
         .map((group) => ({
           year: group.year,
-          papers: group.papers.filter((p) => p.peerReviewed !== false),
+          papers: group.papers.filter((p) => !p.arxiv && p.peerReviewed !== false),
         }))
         .filter((group) => group.papers.length > 0)
 
       const nonPeerReviewedPapers = publications.value.flatMap((group) =>
-        group.papers.filter((p) => p.peerReviewed === false)
+        group.papers.filter((p) => !p.arxiv && p.peerReviewed === false)
       )
 
       const categories = []
+      if (arxivPapers.length > 0) {
+        categories.push({
+          label: c.value.pubCategories.arxiv,
+          groups: [{ year: null, papers: arxivPapers }],
+        })
+      }
       if (peerReviewedGroups.length > 0) {
         categories.push({ label: c.value.pubCategories.international, groups: peerReviewedGroups })
       }
@@ -1006,11 +1059,13 @@ export default defineComponent({
 
 .skill-list li,
 .link-list li,
-.resource-list li {
+.resource-list li,
+.reviewer-list li {
   padding: 3px 0;
 }
 
-.reviewer-line {
+.reviewer-line,
+.reviewer-list {
   margin: 0;
   color: var(--fg);
 }

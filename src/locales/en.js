@@ -91,6 +91,12 @@ export default {
       suffix: ', 言語処理学会第32回年次大会 (ANLP2026).',
     },
     {
+      // 官方 Top Reviewer 名单发布后，改成 https://neurips.cc/Conferences/2026/ProgramCommittee
+      url: 'https://neurips.cc/Conferences/2026',
+      label: 'Top Reviewer',
+      suffix: ', The 40th Annual Conference on Neural Information Processing Systems (NeurIPS 2026), Sydney.',
+    },
+    {
       url: 'https://www.kugd.k.kyoto-u.ac.jp/en/support/recruitlist/',
       label: 'Kyoto University DoGS NEXT AI Program',
       suffix: ' (DoGS Fellow).',
@@ -98,8 +104,14 @@ export default {
   ],
 
   pubCategories: {
+    arxiv: 'arXiv',
     international: 'International Conferences',
     domestic: 'Domestic Conferences',
+  },
+
+  reviewCategories: {
+    conference: 'Conference',
+    workshop: 'Workshop',
   },
 
   pubUI: {
