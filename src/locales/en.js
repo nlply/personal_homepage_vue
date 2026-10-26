@@ -120,6 +120,8 @@ export default {
     hideBibtex: 'hide BibTex',
     copy: 'copy',
     copied: 'copied',
+    showAll: 'Show all publications',
+    showLess: 'Show less',
   },
 
   blogUI: {
@@ -166,6 +168,6 @@ export default {
     developedByPrefix: 'Developed by',
     and: 'and',
     developedBySuffix: '',
-    lastUpdated: 'Last updated Aug. 11, 2026',
+    lastUpdated: 'Last updated Oct. 26, 2026',
   },
 }

@@ -117,6 +117,8 @@ export default {
     hideBibtex: '收起 BibTex',
     copy: '复制',
     copied: '已复制',
+    showAll: '展开全部',
+    showLess: '收起',
   },
 
   blogUI: {
@@ -161,6 +163,6 @@ export default {
     developedByPrefix: '由',
     and: '与',
     developedBySuffix: '开发',
-    lastUpdated: '最后更新于 2026 年 8 月 11 日',
+    lastUpdated: '最后更新于 2026 年 10 月 26 日',
   },
 }

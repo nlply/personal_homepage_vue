@@ -78,9 +78,9 @@
           </ul>
         </section>
 
-        <section class="section">
+        <section ref="pubSection" class="section">
           <h2 class="section-title">{{ c.sections.publications }}</h2>
-          <template v-for="category in publicationCategories" :key="category.label">
+          <template v-for="category in visiblePublicationCategories" :key="category.label">
             <h3 class="section-subtitle">{{ category.label }}</h3>
             <div v-for="publication in category.groups" :key="category.label + '-' + (publication.year || 'flat')" class="pub-group">
               <div v-if="publication.year" class="pub-year">{{ publication.year }}</div>
@@ -125,6 +125,10 @@
             </ol>
             </div>
           </template>
+          <button v-if="totalPapers > PUB_PREVIEW_COUNT" class="pub-toggle" type="button" :aria-expanded="pubsExpanded" @click="togglePubs">
+            {{ pubsExpanded ? c.pubUI.showLess : c.pubUI.showAll }}
+            <span class="pub-toggle-icon" :class="{ 'is-open': pubsExpanded }" aria-hidden="true">▾</span>
+          </button>
         </section>
 
         <!-- 博客：主页只列目录，点标题进入全文；文章在 src/posts/ 下用 Markdown 编写 -->
@@ -216,7 +220,7 @@
 
 <script>
 
-import {defineComponent, ref, computed} from 'vue'
+import {defineComponent, ref, computed, nextTick} from 'vue'
 import {useContent} from '@/locales'
 import {posts} from '@/blog'
 import VisitorMap from '@/components/VisitorMap.vue'
@@ -533,6 +537,46 @@ export default defineComponent({
       return categories
     })
 
+    // 默认只显示页面顺序上的前几篇，其余点按钮展开；只剩空的年份组和分类不显示
+    const PUB_PREVIEW_COUNT = 5
+    const pubsExpanded = ref(false)
+    const pubSection = ref(null)
+    const totalPapers = computed(() =>
+      publicationCategories.value.reduce((n, category) =>
+        n + category.groups.reduce((m, group) => m + group.papers.length, 0), 0)
+    )
+    const visiblePublicationCategories = computed(() => {
+      if (pubsExpanded.value) {
+        return publicationCategories.value
+      }
+      let left = PUB_PREVIEW_COUNT
+      const categories = []
+      for (const category of publicationCategories.value) {
+        const groups = []
+        for (const group of category.groups) {
+          if (left <= 0) break
+          const papers = group.papers.slice(0, left)
+          left -= papers.length
+          groups.push({ ...group, papers })
+        }
+        if (groups.length > 0) {
+          categories.push({ ...category, groups })
+        }
+      }
+      return categories
+    })
+    const togglePubs = () => {
+      pubsExpanded.value = !pubsExpanded.value
+      // 收起后页面一下变短，如果 Publications 标题已经滚出视野，就滚回来，免得停在别的栏目
+      if (!pubsExpanded.value) {
+        nextTick(() => {
+          if (pubSection.value && pubSection.value.getBoundingClientRect().top < 0) {
+            pubSection.value.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        })
+      }
+    }
+
     const openBibs = ref({})
     const copiedBib = ref('')
     const toggleBib = (id) => {
@@ -580,6 +624,12 @@ export default defineComponent({
       posts,
       publications,
       publicationCategories,
+      PUB_PREVIEW_COUNT,
+      pubsExpanded,
+      pubSection,
+      totalPapers,
+      visiblePublicationCategories,
+      togglePubs,
       openBibs,
       copiedBib,
       toggleBib,
@@ -975,6 +1025,37 @@ export default defineComponent({
   color: var(--fg);
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.pub-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  padding: 4px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--link);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.pub-toggle:hover,
+.pub-toggle:focus-visible {
+  border-color: var(--link);
+}
+
+.pub-toggle-icon {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.pub-toggle-icon.is-open {
+  transform: rotate(180deg);
 }
 
 .pub-bibtex-copy {
