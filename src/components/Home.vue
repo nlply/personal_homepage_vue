@@ -236,6 +236,31 @@ export default defineComponent({
           'year': 2026,
           'papers': [
             {
+          id: 'preprint-2026-post-training-value-preferences',
+          title: 'How Does Post-Training Shape LLM Value Preferences?',
+          titleExplain: '',
+          titleURL: 'https://arxiv.org/abs/2610.33371',
+          authers: ['Yang Liu', 'Shaoyang Xu', 'Masahiro Kaneko', 'Chengzhi Zhong', 'Wenxuan Zhang', 'Chenhui Chu'],
+          boldAuther: 'Yang Liu',
+          conference: 'arXiv 2026',
+          arxiv: true,
+          resources: [
+            {
+              name: '[code]',
+              url: 'https://github.com/ku-nlp/llm-value-preferences'
+            },
+          ],
+          bibtex: `@misc{liu2026doesposttrainingshapellm,
+      title={How Does Post-Training Shape LLM Value Preferences?},
+      author={Yang Liu and Shaoyang Xu and Masahiro Kaneko and Chengzhi Zhong and Wenxuan Zhang and Chenhui Chu},
+      year={2026},
+      eprint={2610.33371},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2610.33371},
+}`
+        },
+            {
           id: 'preprint-2026-speak-vs-know',
           title: 'Speak vs. Know: Balancing Behavior and Knowledge Distributions of Large Language Models',
           titleExplain: '',
@@ -244,7 +269,12 @@ export default defineComponent({
           boldAuther: 'Yang Liu',
           conference: 'arXiv 2026',
           arxiv: true,
-          resources: [],
+          resources: [
+            {
+              name: '[code]',
+              url: 'https://github.com/ku-nlp/speak-vs-know'
+            },
+          ],
           bibtex: `@misc{liu2026speakvsknowbalancing,
       title={Speak vs. Know: Balancing Behavior and Knowledge Distributions of Large Language Models},
       author={Yang Liu and Masahiro Kaneko and Chenhui Chu},
