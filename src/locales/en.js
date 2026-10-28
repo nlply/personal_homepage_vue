@@ -79,6 +79,22 @@ export default {
     'Theoretical interpretability of large language models',
   ],
 
+  researchMap: {
+    intro: 'How culture enters a large language model, shows up in what it says, and can be measured and steered. Click a paper to open it.',
+    stages: {
+      data: { title: 'Data', desc: 'Culture and stereotypes encoded in human text' },
+      training: { title: 'Training', desc: 'Post-training shapes and amplifies value preferences' },
+      inference: { title: 'Inference', desc: 'Prompts and context sway what the model says' },
+      evaluation: { title: 'Evaluation', desc: 'Measuring cultural and value alignment' },
+      alignment: { title: 'Alignment & Steering', desc: 'Methods that feed back into training and inference' },
+    },
+    methods: {
+      promptLanguage: 'Prompt-language steering',
+      balanced: 'Balancing behavior and knowledge',
+      headIntervention: 'Turning off entrainment heads',
+    },
+  },
+
   awards: [
     {
       url: 'https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/',

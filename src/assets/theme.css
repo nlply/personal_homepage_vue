@@ -21,6 +21,12 @@
   --sep: #b9b9b9;
   --collab-bg: #f2f7fd;
   --brand-github: #6f42c1;
+  /* 研究地图各阶段的颜色 */
+  --rm-data: #8b5cf6;
+  --rm-training: #e07b24;
+  --rm-inference: #129c8a;
+  --rm-evaluation: #1772d0;
+  --rm-alignment: #c0922a;
 
   width: 100%;
   display: flex;
@@ -57,6 +63,11 @@ html[data-theme="dark"] .site-page {
   --sep: #4a4a52;
   --collab-bg: #16202e;
   --brand-github: #a371f7;
+  --rm-data: #a78bfa;
+  --rm-training: #f0a050;
+  --rm-inference: #3cc4b0;
+  --rm-evaluation: #6db7ff;
+  --rm-alignment: #f0c862;
 }
 
 .site-content {

@@ -76,6 +76,22 @@ export default {
     '大语言模型的理论可解释性',
   ],
 
+  researchMap: {
+    intro: '文化如何进入大语言模型、体现在它的输出中，又如何被评估和引导。点击论文即可打开。',
+    stages: {
+      data: { title: '数据', desc: '人类文本中蕴含的文化与刻板印象' },
+      training: { title: '训练', desc: '后训练塑造并放大价值偏好' },
+      inference: { title: '推理', desc: '提示与上下文左右模型的表达' },
+      evaluation: { title: '评估', desc: '衡量文化与价值对齐' },
+      alignment: { title: '对齐与引导', desc: '作用回训练和推理阶段的方法' },
+    },
+    methods: {
+      promptLanguage: '用提示语言引导',
+      balanced: '平衡行为分布与知识分布',
+      headIntervention: '关闭引发上下文牵引的注意力头',
+    },
+  },
+
   awards: [
     {
       url: 'https://aaai.org/about-aaai/aaai-awards/aaai-conference-paper-awards-and-recognition/',

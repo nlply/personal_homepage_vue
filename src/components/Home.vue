@@ -48,6 +48,7 @@
           <p class="collab-policy">{{ c.collab.policy }}</p>
         </div>
 
+        <!-- News 暂时隐藏；恢复时去掉这层注释即可，内容在语言文件的 news 里
         <section class="section">
           <h2 class="section-title">{{ c.sections.news }}</h2>
           <ul class="plain-list news-list">
@@ -61,12 +62,16 @@
             </li>
           </ul>
         </section>
+        -->
 
         <section class="section">
           <h2 class="section-title">{{ c.sections.interests }}</h2>
+          <!-- 原来的研究方向列表，换成了下面的研究地图
           <ul class="research-list">
             <li v-for="interest in c.interests" :key="interest">{{ interest }}</li>
           </ul>
+          -->
+          <research-map :papers="paperById"/>
         </section>
 
         <section class="section">
@@ -224,9 +229,10 @@ import {defineComponent, ref, computed, nextTick} from 'vue'
 import {useContent} from '@/locales'
 import {posts} from '@/blog'
 import VisitorMap from '@/components/VisitorMap.vue'
+import ResearchMap from '@/components/ResearchMap.vue'
 
 export default defineComponent({
-  components: {VisitorMap},
+  components: {VisitorMap, ResearchMap},
   setup() {
     // 当前语言的文案包；论文数据本身不翻译，保留原文
     const c = useContent()
@@ -567,6 +573,11 @@ export default defineComponent({
       return categories
     })
 
+    // 研究地图按 id 引用论文
+    const paperById = computed(() =>
+      Object.fromEntries(publications.value.flatMap((group) => group.papers).map((paper) => [paper.id, paper]))
+    )
+
     // 默认只显示页面顺序上的前几篇，其余点按钮展开；只剩空的年份组和分类不显示
     const PUB_PREVIEW_COUNT = 5
     const pubsExpanded = ref(false)
@@ -654,6 +665,7 @@ export default defineComponent({
       posts,
       publications,
       publicationCategories,
+      paperById,
       PUB_PREVIEW_COUNT,
       pubsExpanded,
       pubSection,
